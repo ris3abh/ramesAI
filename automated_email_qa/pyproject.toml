@@ -1,0 +1,40 @@
+[project]
+name = "automated_email_qa"
+version = "0.1.0"
+description = "Automated Email QA System using CrewAI for comprehensive email validation and quality assurance"
+authors = [{ name = "Rishabh Sharma", email = "rishabh.sharma@spinutech.com" }]
+requires-python = ">=3.10,<3.14"
+dependencies = [
+    "crewai[tools]>=0.201.0,<1.0.0",
+    "streamlit>=1.29.0",
+    "beautifulsoup4>=4.12.0",
+    "lxml>=4.9.3",
+    "pandas>=2.1.0",
+    "python-dotenv>=1.0.0",
+    "tenacity>=8.2.3",
+    "pillow>=10.1.0",
+    "requests>=2.31.0",
+    "python-multipart>=0.0.6",
+    "streamlit-aggrid>=0.3.4",
+    "plotly>=5.17.0",
+    "chardet>=5.2.0",
+    "openpyxl>=3.1.2",
+    "python-docx>=1.1.0",
+    "pypdf>=3.17.0",
+    "email-validator>=2.1.0"
+]
+
+[project.scripts]
+automated_email_qa = "automated_email_qa.main:run"
+run_crew = "automated_email_qa.main:run"
+train = "automated_email_qa.main:train"
+replay = "automated_email_qa.main:replay"
+test = "automated_email_qa.main:test"
+ui = "automated_email_qa.streamlit_app:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.crewai]
+type = "crew"
