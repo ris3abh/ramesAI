@@ -1,0 +1,1067 @@
+Delivered-To: izzy.hendricks@spinutech.com
+Received: by 2002:a2e:a587:0:b0:335:4609:1ec8 with SMTP id m7csp277132ljp;
+        Sat, 30 Aug 2025 08:01:38 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IFHzeACDkK5bkLt0/qXSRLqcqFEB6MD8+4dptu01hTUOoydQpgYZd/uMyvROTmMWUWfUzrK
+X-Received: by 2002:a05:6214:234c:b0:70d:c901:64fe with SMTP id 6a1803df08f44-70fac883ce1mr27816546d6.41.1756566097960;
+        Sat, 30 Aug 2025 08:01:37 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1756566097; cv=none;
+        d=google.com; s=arc-20240605;
+        b=WTTY/JrLYvnVvQBA0gi+MplAgsEUVaPO9FOwoE45V7DVoNpNEhdd6j01DB/aIpoOX1
+         zYEayeNIR1NJzdF8kOMKVf6SvapWOnJLFvuAyGDbNKyHrUiyJ7VK+6h///qyYyTMcBKO
+         yxuVH0wklsS64TK0+TTWN14lmSjNgg1oXDXxX7fn4UTPl7r3ZytJHagJVsXC8GJ3C3GQ
+         1JoQ3CPg03axwP7/05dZZCtnpCn26pINi1zLQanIQsUYzd+ol4x7g3HAyR2wtZ7jZRpB
+         kt9CV8D+c9ChaNX/2zTJe/Eg2mHLJ0YwAtJnXqeSuNQyFAYXs8uC7fD08JVWssOLvV32
+         4zCw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=message-id:reply-to:mime-version:list-unsubscribe-post
+         :list-unsubscribe:date:subject:to:from:dkim-signature:dkim-signature;
+        bh=U1+754lrhN58ZgY4DtkCjQW11bcuGHWxX7zyzGZDTWM=;
+        fh=E9GavfnmGdVkpaW3MoyVLgc7n6UxH5Lefg98dkw5ZKw=;
+        b=FSgWLrF5YL1JqBVztIMrlQi5Mhs2XxFWOZO2E3xIHiZ1rSzLCYz6mPDeBq/rKJAcEQ
+         ZK0PVqXtHnv5qJLZaLXRYwZNsZP+00nqMv/Z/+Co6Iv0HDgDLENoe6r6adRBYsE8iVuV
+         wWNmF/7DHxAtxEE3jWv4iTvgCLEy20rhwwLyT7H2ZgClq5fKCOtO8mwPfd97ZsjLev05
+         MLEkPZOgH2k1hfSb0JftwMY1XSRjKRMYL1ZTcEPwkWfX5ueer9n9noesPJJX3IKxvVpN
+         OGLL+j9CEX62slr+9kdYSBiyrRXGen1raJmHrCKQjgWUvdG0cUP/6nSV7Oix39bL+wG1
+         iZPw==;
+        dara=google.com
+ARC-Authentication-Results: i=1; mx.google.com;
+       dkim=pass header.i=@e.yanmartractor.com header.s=12dkim1 header.b="I3RFIM/Y";
+       dkim=pass header.i=@s12.y.mc.salesforce.com header.s=fbldkim12 header.b=fpiqpIjk;
+       spf=pass (google.com: domain of bounce-158_html-69653326-624305-526000901-2@bounce.e.yanmartractor.com designates 13.110.209.44 as permitted sender) smtp.mailfrom=bounce-158_HTML-69653326-624305-526000901-2@bounce.e.yanmartractor.com;
+       dmarc=pass (p=REJECT sp=REJECT dis=NONE) header.from=e.yanmartractor.com
+Return-Path: <bounce-158_HTML-69653326-624305-526000901-2@bounce.e.yanmartractor.com>
+Received: from mta.e.yanmartractor.com (mta.e.yanmartractor.com. [13.110.209.44])
+        by mx.google.com with ESMTPS id 6a1803df08f44-70fb2533409si3276536d6.335.2025.08.30.08.01.37
+        for <izzy.hendricks@spinutech.com>
+        (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+        Sat, 30 Aug 2025 08:01:37 -0700 (PDT)
+Received-SPF: pass (google.com: domain of bounce-158_html-69653326-624305-526000901-2@bounce.e.yanmartractor.com designates 13.110.209.44 as permitted sender) client-ip=13.110.209.44;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@e.yanmartractor.com header.s=12dkim1 header.b="I3RFIM/Y";
+       dkim=pass header.i=@s12.y.mc.salesforce.com header.s=fbldkim12 header.b=fpiqpIjk;
+       spf=pass (google.com: domain of bounce-158_html-69653326-624305-526000901-2@bounce.e.yanmartractor.com designates 13.110.209.44 as permitted sender) smtp.mailfrom=bounce-158_HTML-69653326-624305-526000901-2@bounce.e.yanmartractor.com;
+       dmarc=pass (p=REJECT sp=REJECT dis=NONE) header.from=e.yanmartractor.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; s=12dkim1; d=e.yanmartractor.com;
+ h=From:To:Subject:Date:List-Unsubscribe:List-Unsubscribe-Post:MIME-Version:
+ Reply-To:Message-ID:Content-Type; i=yanmartractors@e.yanmartractor.com;
+ bh=U1+754lrhN58ZgY4DtkCjQW11bcuGHWxX7zyzGZDTWM=;
+ b=I3RFIM/YRgNx2zyWqJIZHxkUqwZTVzBCmnMmGAsBUj6hS2lbg0pW0F1+IXUuOeyZhSIVT8Liq5Df
+   w8anvW2znmbpuMRy8ms0QlDP0zNw3aSz/wwC4d1GBtXa6+aoy8Ifa5BrHmyXkwTLyAxSXBMZ8JpG
+   Py619vgICtIQAGQGgFwHiVW+CHmonqS3SmBbYRUIdni3U+n7y8nZGEgq2O5+WxbgSU55+6YZEQjc
+   iTA+F/F5DgDjfaL5565m2uz+y+Uzr2P3JxhWzfnSurDrrPAaBbtsx0sP2iLMI7Mijua9sck+xQHy
+   uW/5y5BMhmneg9mnT/yZpZhH9VKyf1r4MFxFPg==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; s=fbldkim12; d=s12.y.mc.salesforce.com;
+ h=From:To:Subject:Date:List-Unsubscribe:MIME-Version:Reply-To:Message-ID:
+ Content-Type;
+ bh=U1+754lrhN58ZgY4DtkCjQW11bcuGHWxX7zyzGZDTWM=;
+ b=fpiqpIjk4Dor9CG4tc9IHoguPPTBVFq4VAQybUcc2SbW6TpWs3nuUwuyy4dxYpT2A4rtkWkHO/mC
+   DbuP8JDGikEzXG2j1S6mwXhiyjP97krgTXjMYatMFRAkA3OFAh1o+Sb2rd+cTBYCgUxACTnbIEWk
+   M5YguodCp40P8ZrS2FAkro/aeHA4IdY91MZgyQgQAMDb878ul9LBU2FpjVVyNVhXH7eL/NhCJ8q4
+   8XANt0AT4TC1bjfnDmYlP9h8VBhZYwTmKMRGIX6m93mbfrlVVoUvn39urodngcqfqM+Y8TSWkum2
+   /zXp/Z0usMtkJtEEGZ2cZit1ftFhzpKt3RoDYg==
+Received: by mta.e.yanmartractor.com id hmc9522fmd4n for <izzy.hendricks@spinutech.com>; Sat, 30 Aug 2025 15:01:37 +0000 (envelope-from <bounce-158_HTML-69653326-624305-526000901-2@bounce.e.yanmartractor.com>)
+From: "Yanmar Tractors" <yanmartractors@e.yanmartractor.com>
+To: <izzy.hendricks@spinutech.com>
+Subject: The UTV choice that could save you money long-term
+Date: Sat, 30 Aug 2025 09:01:36 -0600
+List-Unsubscribe: <https://click.e.yanmartractor.com/subscription_center.aspx?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtaWQiOiI1MjYwMDA5MDEiLCJzIjoiNjk2NTMzMjYiLCJsaWQiOiIxNTgiLCJqIjoiNjI0MzA1IiwiamIiOiIyIiwiZCI6IjEyMDAyOSJ9.Vcm010vleBKH-wddyn66LtTnMZzvrT1Awkmxks0K6tI>, <mailto:leave-fd4d15757d0b5c392848-fe5712797361077e7712-fecb127271670478-fe3811727364047d7c1471-ffcd16@leave.e.yanmartractor.com>
+List-Unsubscribe-Post: List-Unsubscribe=One-Click
+MIME-Version: 1.0
+Reply-To: "Yanmar America Corporation" <reply-fecb127271670478-158_HTML-69653326-526000901-2@e.yanmartractor.com>
+X-SFMC-Stack: 12
+x-job: 526000901_624305
+Message-ID: <84474f11-74f2-4d3b-bcf0-3f89952077fb@iad4s12mta29.xt.local>
+Content-Type: multipart/alternative;
+	boundary="zvUob5wWwh2a=_?:"
+
+This is a multi-part message in MIME format.
+
+--zvUob5wWwh2a=_?:
+Content-Type: text/plain;
+	charset="utf-8"
+Content-Transfer-Encoding: 8bit
+
+
+YANMAR
+ 
+ 
+ Explore UTVs, attachments and more. 
+  &zwnj; &zwnj; &zwnj; &zwnj; &zwnj;
+ &zwnj; &zwnj; &zwnj; &zwnj; &zwnj;
+ &zwnj; &zwnj; &zwnj; &zwnj; &zwnj;
+  &zwnj; &zwnj; &zwnj; &zwnj; &zwnj;
+ &zwnj; &zwnj; &zwnj; &zwnj; &zwnj;
+ &zwnj; &zwnj; &zwnj; &zwnj; &zwnj;
+  &zwnj; &zwnj; &zwnj; &zwnj; &zwnj;
+ &zwnj; &zwnj; &zwnj; &zwnj; &zwnj;
+ &zwnj; &zwnj; &zwnj; &zwnj; &zwnj;
+  &zwnj; &zwnj; &zwnj; &zwnj; &zwnj;
+ &zwnj; &zwnj; &zwnj; &zwnj; &zwnj;
+ &zwnj; &zwnj; &zwnj; &zwnj; &zwnj;
+  &zwnj; &zwnj; &zwnj; &zwnj; &zwnj;
+ &zwnj; &zwnj; &zwnj; &zwnj; &zwnj;
+ &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj;
+ &zwnj; &zwnj; &zwnj; &zwnj; &zwnj;
+ &zwnj; &zwnj; &zwnj; &zwnj; &zwnj;
+  &zwnj; &zwnj; &zwnj; &zwnj; &zwnj;
+ &zwnj; &zwnj; &zwnj; &zwnj; &zwnj;
+ &zwnj; &zwnj; &zwnj; &zwnj; &zwnj;
+  &zwnj; &zwnj; &zwnj; &zwnj; &zwnj;
+
+
+https://click.e.yanmartractor.com/?qs=f1af8890686723da35f2bfc1d0d50a7c3bae2b0ff4f0b6ce0a952df1ef6962796ea0885ba5e4ed21590b0159b26fbba1c1cee291a463cd54 
+
+
+ 
+ 
+
+
+ Gas vs. Diesel: Which UTV Is Right for You?
+When it comes to choosing the right UTV for your needs, it’s all about performance, fuel efficiency, and how you plan to use it. Let’s break down the pros and cons of both options so you make an informed decision for your property and lifestyle.
+ 
+ 
+
+https://click.e.yanmartractor.com/?qs=f1af8890686723dad0830b11a21ba6fd3f9cb216cebe9d7e745e4f9b61e7c3715ce10670ddfa1a5f590ddc45d074536d441a46fd45795f30 
+LEARN MORE 
+
+
+
+
+
+https://click.e.yanmartractor.com/?qs=f1af8890686723da3c96c95f4c6faa764ba9cf0e17b4bc61572bb34a8ebacb92a3a26d6c8d304a12a59297a4b1d02bbd9e937c6d5eb9275f 
+
+Get More Done with These Simple Summer Tractor Projects
+
+It’s not too late to tackle another summer project! This guide provides simple, actionable ideas including organizing your workshop and upgrading attachments that will help you get the most out of your Yanmar before autumn starts.
+
+https://click.e.yanmartractor.com/?qs=f1af8890686723da3c96c95f4c6faa764ba9cf0e17b4bc61572bb34a8ebacb92a3a26d6c8d304a12a59297a4b1d02bbd9e937c6d5eb9275f 
+GET STARTED 
+
+https://click.e.yanmartractor.com/?qs=f1af8890686723da34a7284db97f6c17ceb748d2537f76340647fdee9ebaf539c6a7e9c6f9d4bfc882e202c8a558ea63bf917bd7cbb95425 
+
+Real Owners, Real Work, Real Results
+
+Still discovering how Yanmar can help with your homestead? See it in action! Follow 
+https://click.e.yanmartractor.com/?qs=f1af8890686723da34a7284db97f6c17ceb748d2537f76340647fdee9ebaf539c6a7e9c6f9d4bfc882e202c8a558ea63bf917bd7cbb95425 
+@yanmartractorsamerica  on Instagram to see how Yanmar owners are putting their machines to work.
+
+https://click.e.yanmartractor.com/?qs=f1af8890686723da34a7284db97f6c17ceb748d2537f76340647fdee9ebaf539c6a7e9c6f9d4bfc882e202c8a558ea63bf917bd7cbb95425 
+JOIN THE COMMUNITY 
+
+
+
+
+Explore Our Latest Exclusive Offers
+
+Want to get the best price possible on Yanmar tractors and attachments? We have new exclusive offers and cash rebates each month that provide serious savings you won’t find anywhere else.
+
+
+ Click below to see what’s currently available.
+
+https://click.e.yanmartractor.com/?qs=f1af8890686723da8a895c57134fb09790e3fef0a70313488fd207db27e2bb642d545a942c3ebface25c92691d2a3ffedcf4e00037b4900c 
+EXPLORE OFFERS 
+
+https://click.e.yanmartractor.com/?qs=f1af8890686723da6e0a6718529d5c32b9cca8149a498a02cd91d0866e034a8792a8a22440757e37d750b0ff0d8ad9c8c1bb5539b2bd58a0 
+
+Custom Tractor Builder
+
+Design your dream machine - from tire treads to attachments - in just a few clicks.
+
+https://click.e.yanmartractor.com/?qs=f1af8890686723da6e0a6718529d5c32b9cca8149a498a02cd91d0866e034a8792a8a22440757e37d750b0ff0d8ad9c8c1bb5539b2bd58a0 
+BUILD MY TRACTOR 
+
+
+ 
+
+ 
+
+
+Connect With Yanmar
+
+Our dedicated Customer Experience Team is here to assist you with all things Yanmar, from maintenance tips to purchasing questions. Whatever you need, we’re just a call or click away.
+
+https://click.e.yanmartractor.com/?qs=f1af8890686723da9f990c5e99f273dca98c3c8439e92c8236263ebd0d6829ed6e7c4a967cdd0e0467f277c981957e07bcef773d3327b9e1 
+SEND EMAIL 
+
+tel:+7706370441 
+CALL 770-637-0441 
+
+
+ 
+ 
+
+
+ 
+
+https://click.e.yanmartractor.com/?qs=f1af8890686723da4ad87cfa568112d562f2d0b0ef793021c8777439e94db9126559cbf533ea686168bc3ab54854ab367c567793dfc5258b 
+
+https://click.e.yanmartractor.com/?qs=f1af8890686723da34a7284db97f6c17ceb748d2537f76340647fdee9ebaf539c6a7e9c6f9d4bfc882e202c8a558ea63bf917bd7cbb95425 
+
+https://click.e.yanmartractor.com/?qs=f1af8890686723da0deb097fb34c9ef95f68827e1f8084476e4845a598035a5aaac92c8ebc992d287199851fb1b072519d1d9726b223089a 
+
+https://click.e.yanmartractor.com/?qs=f1af8890686723da0bc3800f8c7f3a3e7c4952db47cef6ecee8912ce295876b1ac7acc2aa5291e8e8b31be274cfc825adec5f3faa4fa53b2 
+
+https://click.e.yanmartractor.com/?qs=f1af8890686723da35f2bfc1d0d50a7c3bae2b0ff4f0b6ce0a952df1ef6962796ea0885ba5e4ed21590b0159b26fbba1c1cee291a463cd54 
+
+Yanmar America Corporation 
+All rights reserved.Yanmar America
+101 International Pkwy 
+
+ Adairsville, GA 30103 US 
+
+You are receiving this email because you are subscribed to Yanmar Tractor 
+
+ communications. If you no longer wish to receive these emails, 
+https://click.e.yanmartractor.com/?qs=f1af8890686723da4d12dd26311d7486744f8d6cf75dbbca83f822a218c7ca49ad77f1b1c8d912c4fb6ff59d0bdb1f854a2937e714f1d8de 
+click here . 
+
+ If you would like to personalize your experience, please 
+https://click.e.yanmartractor.com/?qs=f1af8890686723da4d12dd26311d7486744f8d6cf75dbbca83f822a218c7ca49ad77f1b1c8d912c4fb6ff59d0bdb1f854a2937e714f1d8de 
+update your preferences . 
+
+https://click.e.yanmartractor.com/?qs=f1af8890686723daff15842e62f9b9d2ffabc5271347e79e069f3c84fca5e4cbd7ccf6f95a61136209bea8643eace9d2baa518ac57964403 
+Terms of use  | 
+https://click.e.yanmartractor.com/?qs=f1af8890686723dafd4dce376520bc106a1d3627a3587b9a3814a9f4982a41b4a6c3c08a36dd1b6b09f10bad2d1db1f1b11a8377fc36b664 
+Privacy 
+
+
+ 
+ 
+
+https://click.e.yanmartractor.com/profile_center.aspx?qs=9900ad54940a70349f952782ab7d7b870b3f08337b852b6b438e004bf7586b5850a330bcf4167957780661a9698956e744325663134422577760250832946fe0
+
+
+--zvUob5wWwh2a=_?:
+Content-Type: text/html;
+	charset="utf-8"
+Content-Transfer-Encoding: 8bit
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"       xmlns:v="urn:schemas-microsoft-com:vml"       xmlns:o="urn:schemas-microsoft-com:office:office">
+  <head>
+    <!--[if gte mso 9]><xml> <o:OfficeDocumentSettings> <o:AllowPNG/> <o:PixelsPerInch>96</o:PixelsPerInch> </o:OfficeDocumentSettings> </xml><![endif]-->
+    <title>YANMAR
+    </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no"/>
+    <style type="text/css">
+      body {
+        margin: 0;
+        padding: 0;
+        -webkit-text-size-adjust: 100% !important;
+        -ms-text-size-adjust: 100% !important;
+        -webkit-font-smoothing: antialiased !important;
+      }
+      img {
+        border: 0 !important;
+        outline: none !important;
+      }
+      p {
+        Margin: 0px !important;
+        Padding: 0px !important;
+      }
+      table {
+        border-collapse: collapse;
+        mso-table-lspace: 0px;
+        mso-table-rspace: 0px;
+      }
+      td, a, span {
+        border-collapse: collapse;
+        mso-line-height-rule: exactly;
+      }
+      .ExternalClass * {
+        line-height: 100%;
+      }
+      .em_defaultlink a {
+        color: inherit;
+        text-decoration: none;
+      }
+      .em_g_img + div {
+        display: none;
+      }
+      a[x-apple-data-detectors], u + .em_body a, #MessageViewBody a {
+        color: inherit;
+        text-decoration: none;
+        font-size: inherit;
+        font-family: inherit;
+        font-weight: inherit;
+        line-height: inherit;
+      }
+      center table {
+        width: 100% !important;
+      }
+      @media only screen and (max-width:599px) {
+        .em_main_table {
+          width: 100% !important;
+        }
+        .em_wrapper {
+          width: 100% !important;
+        }
+        .em_hide {
+          display: none !important;
+        }
+        .em_full_img {
+          width: 100% !important;
+          height: auto !important;
+        }
+        .em_full_img img {
+          width: 100% !important;
+          height: auto !important;
+        }
+        .em_full_img1 {
+          width: 100% !important;
+          height: auto !important;
+          max-width: none !important;
+        }
+        .em_full_img1 img {
+          width: 100% !important;
+          height: auto !important;
+          max-width: none !important;
+        }
+        .em_center {
+          text-align: center !important;
+        }
+        .em_side10 {
+          width: 10px !important;
+        }
+        .em_aside10 {
+          padding-left: 10px !important;
+          padding-right: 10px !important;
+        }
+        .em_padm {
+          padding: 20px 15px !important;
+        }
+        .em_padm2 {
+          padding: 20px 15px 10px !important;
+        }
+        .em_side15 {
+          width: 15px !important;
+        }
+        .em_aside15 {
+          padding-left: 15px !important;
+          padding-right: 15px !important;
+        }
+        .em_ptop {
+          padding-top: 20px !important;
+        }
+        .em_pbottom {
+          padding-bottom: 20px !important;
+        }
+        .em_h20 {
+          height: 20px !important;
+          font-size: 1px!important;
+          line-height: 1px!important;
+        }
+        .em_h40 {
+          height: 40px !important;
+          font-size: 1px!important;
+          line-height: 1px!important;
+        }
+        .em_h30 {
+          height: 30px !important;
+        }
+        .em_mob_block {
+          display: block !important;
+        }
+        .em_hauto {
+          height: auto !important;
+        }
+        .em_clear {
+          clear: both !important;
+          width: 100% !important;
+          display: block !important;
+        }
+        u + .em_body .em_full_wrap {
+          width: 100% !important;
+          width: 100vw !important;
+        }
+        .em_ptop10 {
+          padding-top: 10px !important;
+        }
+        .em_ptop30 {
+          padding-top: 30px !important;
+        }
+        .em_border_top {
+          border-top: 1px solid #000000;
+        }
+        .em_pbottom5 {
+          padding-bottom: 5px !important;
+        }
+        .em_aside30 {
+          padding-left: 30px !important;
+          padding-right: 30px !important;
+        }
+        .em_font_16 {
+          font-size: 16px !important;
+          line-height: 21px !important;
+        }
+      }
+      @media screen and (max-width: 480px) {
+        .em_logo_resize img {
+          width: 250px !important;
+          height: auto !important;
+        }
+        .em_font_28 {
+          font-size: 24px !important;
+          line-height: 30px !important;
+        }
+        .em_side20 {
+          width: 40px !important;
+        }
+        .em_font_20 {
+          font-size: 18px !important;
+          line-height: 22px !important;
+        }
+        .em_font_14 {
+          font-size: 14px !important;
+          line-height: 18px !important;
+          padding-top: 5px !important;
+        }
+        .em_cta_width {
+          width: 100% !important;
+          max-width: 320px !important;
+        }
+        .em_cta_font {
+          font-size: 15px !important;
+        }
+        .em_icon_resize {
+          width: 60px !important;
+          height: auto !important;
+        }
+        .em_icon_resize img {
+          width: 60px !important;
+          height: auto !important;
+        }
+        .em_font_26 {
+          font-size: 22px !important;
+          line-height: 26px !important;
+        }
+      }
+      @media screen and (max-width:374px) {
+        .em_logo_resize img {
+          width: 200px !important;
+          height: auto !important;
+        }
+        .em_font_28 {
+          font-size: 20px !important;
+          line-height: 28px !important;
+        }
+        .em_font_20 {
+          font-size: 16px !important;
+          line-height: 20px !important;
+        }
+        .em_font_14 {
+          font-size: 12px !important;
+          line-height: 16px !important;
+          padding-top: 5px !important;
+        }
+        .em_cta_width {
+          width: 100% !important;
+          max-width: 320px !important;
+        }
+        .em_cta_font {
+          font-size: 15px !important;
+        }
+        .em_icon_resize {
+          width: 50px !important;
+          height: auto !important;
+        }
+        .em_icon_resize img {
+          width: 50px !important;
+          height: auto !important;
+        }
+        .em_side20 {
+          width: 20px !important;
+        }
+        .em_font_26 {
+          font-size: 20px !important;
+          line-height: 24px !important;
+        }
+      }
+    </style>
+    <!--[if mso]> <style type="text/css"> .em_h8 {height:10px !important;} </style> <![endif]-->
+  </head>
+  <body class="em_body" style="margin:0px auto; padding:0px;background-color:#EFEFEF;" bgcolor="#EFEFEF"><style type="text/css">
+div.preheader 
+{ display: none !important; } 
+</style>
+<div class="preheader" style="font-size: 1px; display: none !important;"></div>
+    <!-- == Header Section == -->
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="em_full_wrap" bgcolor="#EFEFEF" style="table-layout:fixed;background-color:#EFEFEF;">
+      <tr>
+        <td align="center" valign="top">
+          <table align="center" width="600" border="0" cellspacing="0" cellpadding="0" class="em_main_table" style="width:600px; table-layout:fixed;background-color:#ffffff;" bgcolor="#ffffff">
+            <tr>
+              <td align="center" valign="top">
+                <table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="min-width: 100%; " class="stylingblock-content-wrapper"><tr><td class="stylingblock-content-wrapper camarker-inner">
+<div style="display:none;font-size:0;line-height:0;max-height:0;max-width:0;opacity:0;overflow:hidden;mso-hide:all;"> Explore UTVs, attachments and more. 
+  &nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;
+&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;
+&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;
+  &nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;
+&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;
+&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;
+   &nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;
+&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;
+&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;
+   &nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;
+&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;
+&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;
+   &nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;
+&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;
+&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;
+&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;
+&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;
+  &nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;
+&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;
+&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;
+   &nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;
+</div></td></tr></table><table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="min-width: 100%; " class="stylingblock-content-wrapper"><tr><td class="stylingblock-content-wrapper camarker-inner"><table role="presentation" style="min-width: 100%; " class="stylingblock-content-wrapper" width="100%" cellspacing="0" cellpadding="0" border="0">
+                    <tr>
+                      <td class="stylingblock-content-wrapper camarker-inner"><table style="width:600px;" class="em_wrapper" width="600" cellspacing="0" cellpadding="0" border="0" align="center">
+                          <tr>
+                            <td class="em_full_img" valign="top" align="center"><a href="https://click.e.yanmartractor.com/?qs=f1af8890686723da4c1a045e7d855a92f245f099918aa947eb3f7400da80d191022e5d69c00142cf2b7f99e37907b459b1af3a73415fce74" target="_blank" style="text-decoration:none;"><img src="https://image.e.yanmartractor.com/lib/fe3811727364047d7c1471/m/1/c3a7f113-77ba-41c4-923e-a39e04553e86.png" style="color:#000000;font-family:Arial, Helvetica, sans-serif;font-size:15px;line-height:20px;font-weight:bold;display:block;max-width:600px;" width="600" border="0"></a></td>
+                          </tr>
+                        </table></td>
+                    </tr>
+                  </table></td></tr></table>
+                
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+    <!-- == //Header Section == --> 
+    <!-- == Body Section == -->
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="em_full_wrap" bgcolor="#EFEFEF" style="table-layout:fixed;background-color:#EFEFEF;">
+      <tr>
+        <td align="center" valign="top">
+          <table align="center" width="600" border="0" cellspacing="0" cellpadding="0" class="em_main_table" style="width:600px; table-layout:fixed;background-color:#ffffff;" bgcolor="#ffffff">
+            <tr>
+              <td align="center" valign="top">
+                <table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="min-width: 100%; " class="stylingblock-content-wrapper"><tr><td class="stylingblock-content-wrapper camarker-inner"><table role="presentation" style="min-width: 100%; " class="stylingblock-content-wrapper" width="100%" cellspacing="0" cellpadding="0" border="0">
+  <tr>
+    <td class="stylingblock-content-wrapper camarker-inner">
+      <table style="width:600px;" class="em_wrapper" width="600" cellspacing="0" cellpadding="0" border="0" align="center">
+        <tr>
+          <td height="40" style="height:40px;" class="em_h20">
+            <img alt="" src="https://image.e.yanmartractor.com/lib/fe3811727364047d7c1471/m/1/aea1bc45-589c-4481-8894-dcd4121e060f.gif" style="display: block;" width="1" height="1" border="0">
+          </td>
+        </tr>
+        <tr>
+          <td style="padding:0px 28px 0px 38px;" class="em_aside10" valign="top" align="center">
+            <table width="100%" cellspacing="0" cellpadding="0" border="0" align="center">
+              <tr>
+                <td class="em_defaultlink" style="color:#000000;font-family:Helvetica Neue, Helvetica, Arial, sans-serif;font-size:16px;line-height:24px;" align="center">
+                </td>
+              </tr>
+              <tr>
+                <td class="em_defaultlink em_center" style=" color: #dc1e37; font-family:Arial, sans-serif; font-size: 26px; line-height: 32px; font-weight:bold; padding-bottom: 20px;" valign="top" align="left">Gas vs. Diesel: Which UTV Is Right <span style="white-space:nowrap;">for&nbsp;You?</span></td>
+              </tr>
+              <tr>
+                <td class="em_defaultlink em_center" style=" color: #000000; font-family:Arial, sans-serif; font-size: 14px; line-height: 18px; " valign="top" align="left">When it comes to choosing the right UTV for your needs, it’s all about performance, fuel efficiency, and how you plan to use it. Let’s break down the pros and cons of both options so you make an informed decision for your property <span style="white-space:nowrap;">and&nbsp;lifestyle.</span></td>
+              </tr>
+              <tr>
+                <td style="height: 20px; font-size: 0px; line-height: 0px;" height="20">&nbsp;
+                </td>
+              </tr>
+              <tr>
+                <td align="left" valign="top">
+                  <table align="left" class="em_wrapper" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                      <td valign="top" align="center">
+                        <table style="width:170px;background-color:#dc1e37; box-shadow: 0px 5px 10px 0px rgba(191,191,191,1);" width="170" cellspacing="0" cellpadding="0" border="0" bgcolor="#dc1e37" align="center">
+                          <tr>
+                            <td class="em_defaultlink em_cta_font" style="color:#ffffff;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:16px;height:34px;font-weight:bold;text-transform: uppercase; letter-spacing:0.6px;" valign="middle" height="34" align="center">
+                              <a href="https://click.e.yanmartractor.com/?qs=f1af8890686723da59e8bcbd594f76c9f4556e43be46922adc50ae963cd2d0bb2d39d098fa9ffdd08b75bab76976c7ddd8f4d66fd4413a09" target="_blank" style="text-decoration:none;display:block;line-height:34px;color:#ffffff;">LEARN MORE</a>
+                            </td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td height="40" style="height:40px;" class="em_h20">
+            <img alt="" src="https://image.e.yanmartractor.com/lib/fe3811727364047d7c1471/m/1/aea1bc45-589c-4481-8894-dcd4121e060f.gif" style="display: block;" width="1" height="1" border="0">
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+</td></tr></table><table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="min-width: 100%; " class="stylingblock-content-wrapper"><tr><td class="stylingblock-content-wrapper camarker-inner"><table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="min-width: 100%; " class="stylingblock-content-wrapper">
+  <tr>
+    <td class="stylingblock-content-wrapper camarker-inner">
+      <table role="presentation" style="min-width: 100%; " class="stylingblock-content-wrapper" width="100%" cellspacing="0" cellpadding="0" border="0">
+        <tr>
+          <td class="stylingblock-content-wrapper camarker-inner">
+            <table align="center" width="600" border="0" cellspacing="0" cellpadding="0" class="em_wrapper" style="width: 600px;" bgcolor="#f5f5f5">
+              <tr>
+                <td height="40" style="height:40px;" class="em_h20">
+                  <img alt="" src="https://image.e.yanmartractor.com/lib/fe3811727364047d7c1471/m/1/aea1bc45-589c-4481-8894-dcd4121e060f.gif" style="display: block;" width="1" height="1" border="0">
+                </td>
+              </tr>
+              <tr>
+                <td align="center" valign="top" style="padding:0px 38px 0px 38px;" class="em_aside10">
+                  <table align="center" width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                      <th align="left" valign="top" class="em_clear"> 
+                        <table width="240" align="left" border="0" cellspacing="0" cellpadding="0" class="em_wrapper" style="width: 240px;">
+                          <tr>
+                            <td align="center" valign="top">
+                              <a href="https://click.e.yanmartractor.com/?qs=f1af8890686723da9326bed04ae4b55d74b615e7dc1809d049a011dac1f62f8011fe8fb066b39e61671e92a115d5dc1206c4665f27c52b3c" style="text-decoration: none;" target="_blank"><img alt="" src="https://image.e.yanmartractor.com/lib/fe3811727364047d7c1471/m/1/2f98866c-e0ee-45aa-8d23-61a421e7e24e.png" style="display: block; width: 240px;  color: #000000;" width="240" border="0"></a>
+                            </td>
+                          </tr>
+                        </table>
+                      </th>
+                      <th align="right" valign="top" class="em_clear"> 
+                        <table width="284" align="right" border="0" cellspacing="0" cellpadding="0" class="em_wrapper" style="width: 284px;">
+                          <tr>
+                            <td align="center" valign="top">
+                              <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <tr>
+                                  <td width="25" style="width:25px;" class="em_hide">
+                                    <img alt="" src="https://image.e.yanmartractor.com/lib/fe3811727364047d7c1471/m/1/aea1bc45-589c-4481-8894-dcd4121e060f.gif" style="display: block;" width="1" height="1" border="0">
+                                  </td>
+                                  <td align="center" valign="top">
+                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                      
+                                      <tr>
+                                  <td height="0" style="height:0px; font-size:0px; line-height:0px;" class="em_h20">
+                                    <img alt="" src="https://image.e.yanmartractor.com/lib/fe3811727364047d7c1471/m/1/aea1bc45-589c-4481-8894-dcd4121e060f.gif" style="display: block;" width="1" height="1" border="0">
+                                  </td>
+                                </tr>
+                                      <tr>
+                                        <td class="em_defaultlink em_center" style=" color: #dc1e37; font-family:Arial, sans-serif; font-size: 23px; line-height: 27px; font-weight:bold;" valign="top" align="left">Get More Done with These Simple Summer <span style="white-space:nowrap;">Tractor&nbsp;Projects</span></td>
+                                      </tr>
+                                      <tr>
+                                        <td height="13" style="height:13px; font-size:0px; line-height:0px;">
+                                          <img alt="" src="https://image.e.yanmartractor.com/lib/fe3811727364047d7c1471/m/1/aea1bc45-589c-4481-8894-dcd4121e060f.gif" style="display: block;" width="1" height="1" border="0">
+                                        </td>
+                                      </tr>
+                                      <tr>
+                                        <td class="em_defaultlink em_center" style=" color: #000000; font-family:Arial, sans-serif; font-size: 14px; line-height: 18px; font-weight:normal; " valign="top" align="left">It’s not too late to tackle another summer project! This guide provides simple, actionable ideas including organizing your workshop and upgrading attachments that will help you get the most out of your Yanmar before <span style="white-space:nowrap;">autumn&nbsp;starts.</span></td>
+                                      </tr>
+                                      <tr>
+                                        <td height="20" style="height:20px; font-size:0px; line-height:0px;">
+                                          <img alt="" src="https://image.e.yanmartractor.com/lib/fe3811727364047d7c1471/m/1/aea1bc45-589c-4481-8894-dcd4121e060f.gif" style="display: block;" width="1" height="1" border="0">
+                                        </td>
+                                      </tr>
+                                      <tr>
+                                        <td valign="top" align="left">
+                                          <table align="left" border="0" cellspacing="0" cellpadding="0" class="em_wrapper">
+                                            <tr>
+                                              <td align="center" valign="top">
+                                                <table style="width:170px;background-color:#dc1e37; box-shadow: 0px 5px 10px 0px rgba(191,191,191,1);                                                               " width="170" cellspacing="0" cellpadding="0" border="0" bgcolor="#dc1e37" align="center">
+                                                  <tr>
+                                                    <td class="em_defaultlink em_cta_font" style="color:#ffffff;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:16px;height:34px;font-weight:bold;text-transform: uppercase; letter-spacing:0.6px;" valign="middle" height="34" align="center">
+                                                      <a href="https://click.e.yanmartractor.com/?qs=f1af8890686723da9326bed04ae4b55d74b615e7dc1809d049a011dac1f62f8011fe8fb066b39e61671e92a115d5dc1206c4665f27c52b3c" target="_blank" style="text-decoration:none;display:block;line-height:34px;color:#ffffff;">GET STARTED</a>
+                                                    </td>
+                                                  </tr>
+                                                </table>
+                                              </td>
+                                            </tr>
+                                          </table>
+                                        </td>
+                                      </tr>
+                                    </table>
+                                  </td>
+                                </tr>
+                              </table>
+                            </td>
+                          </tr>
+                        </table>
+                      </th>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              <tr>
+                <td height="40" style="height:40px;" class="em_h20">
+                  <img alt="" src="https://image.e.yanmartractor.com/lib/fe3811727364047d7c1471/m/1/aea1bc45-589c-4481-8894-dcd4121e060f.gif" style="display: block;" width="1" height="1" border="0">
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table></td></tr></table><table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="min-width: 100%; " class="stylingblock-content-wrapper"><tr><td class="stylingblock-content-wrapper camarker-inner"><table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="min-width: 100%; " class="stylingblock-content-wrapper"><tr><td class="stylingblock-content-wrapper camarker-inner"><table role="presentation" style="min-width: 100%; " class="stylingblock-content-wrapper" width="100%" cellspacing="0" cellpadding="0" border="0">
+  <tr>
+    <td class="stylingblock-content-wrapper camarker-inner">
+      <table align="center" width="600" border="0" cellspacing="0" cellpadding="0" class="em_wrapper" style="width: 600px;" bgcolor="#ffffff">
+        <tr>
+          <td height="40" style="height:40px;" class="em_h20">
+            <img alt="" src="https://image.e.yanmartractor.com/lib/fe3811727364047d7c1471/m/1/aea1bc45-589c-4481-8894-dcd4121e060f.gif" style="display: block;" width="1" height="1" border="0">
+          </td>
+        </tr>
+        <tr>
+          <td align="center" valign="top" style="padding:0px 38px 0px 38px;" class="em_aside10">
+            <table align="center" width="100%" border="0" cellspacing="0" cellpadding="0" dir="rtl">
+              <tr>
+                <th align="left" valign="top" class="em_clear" dir="ltr"> 
+                  <table width="265" align="left" border="0" cellspacing="0" cellpadding="0" class="em_wrapper" style="width: 265px;">
+                    <tr>
+                      <td width="25" style="width:25px;" class="em_hide">
+                        <img alt="" src="https://image.e.yanmartractor.com/lib/fe3811727364047d7c1471/m/1/aea1bc45-589c-4481-8894-dcd4121e060f.gif" style="display: block;" width="1" height="1" border="0">
+                      </td>
+                      <td align="center" valign="top">
+                        <a href="https://click.e.yanmartractor.com/?qs=f1af8890686723dabab9ca21933eba4698131192c266fb667513def87d21276f06f474a33f1a53a82cd81cd8e01c993aac834fa1b9fd691f" style="text-decoration: none;" target="_blank"><img alt="" src="https://image.e.yanmartractor.com/lib/fe3811727364047d7c1471/m/1/05584d02-61fa-4591-ab48-0167bc344f21.png" style="display: block; width: 240px;  color: #000000;" width="240" border="0"></a>
+                      </td>
+                    </tr>
+                  </table>
+                </th>
+                <th align="right" valign="top" class="em_clear" dir="ltr"> 
+                  <table width="259" align="right" border="0" cellspacing="0" cellpadding="0" class="em_wrapper" style="width: 259px;">
+                    <tr>
+                      <td align="center" valign="top">
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                          <tr>
+                            <td align="center" valign="top">
+                              <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <tr>
+                                  <td height="12" style="height:12px; font-size:0px; line-height:0px;" class="em_h20">
+                                    <img alt="" src="https://image.e.yanmartractor.com/lib/fe3811727364047d7c1471/m/1/aea1bc45-589c-4481-8894-dcd4121e060f.gif" style="display: block;" width="1" height="1" border="0">
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td class="em_defaultlink em_center" style=" color: #dc1e37; font-family:Arial, sans-serif; font-size: 23px; line-height: 27px; font-weight:bold;" valign="top" align="left">Real Owners, Real Work, <span style="white-space:nowrap;">Real&nbsp;Results</span></td>
+                                </tr>
+                                <tr>
+                                  <td height="13" style="height:13px; font-size:0px; line-height:0px;">
+                                    <img alt="" src="https://image.e.yanmartractor.com/lib/fe3811727364047d7c1471/m/1/aea1bc45-589c-4481-8894-dcd4121e060f.gif" style="display: block;" width="1" height="1" border="0">
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td class="em_defaultlink em_center" style=" color: #000000; font-family:Arial, sans-serif; font-size: 14px; line-height: 18px; font-weight:normal;padding-right: 10px; " valign="top" align="left">Still discovering how Yanmar can help with your homestead? See it in action! Follow <a href="https://click.e.yanmartractor.com/?qs=f1af8890686723dabab9ca21933eba4698131192c266fb667513def87d21276f06f474a33f1a53a82cd81cd8e01c993aac834fa1b9fd691f" target="_blank" style="text-decoration:underline;color:#000000;">@yanmartractorsamerica</a> on Instagram to see how Yanmar owners are putting their machines <span style="white-space:nowrap;">to&nbsp;work.</span></td>
+                                </tr>
+                                <tr>
+                                  <td height="20" style="height:20px; font-size:0px; line-height:0px;">
+                                    <img alt="" src="https://image.e.yanmartractor.com/lib/fe3811727364047d7c1471/m/1/aea1bc45-589c-4481-8894-dcd4121e060f.gif" style="display: block;" width="1" height="1" border="0">
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td valign="top" align="left">
+                                    <table align="left" border="0" cellspacing="0" cellpadding="0" class="em_wrapper">
+                                      <tr>
+                                        <td align="center" valign="top">
+                                          <table style="width:258px;background-color:#dc1e37; box-shadow: 0px 5px 10px 0px rgba(191,191,191,1);                                                         " width="258" cellspacing="0" cellpadding="0" border="0" bgcolor="#dc1e37" align="center">
+                                            <tr>
+                                              <td class="em_defaultlink" style="color:#ffffff;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:14px;height:34px;font-weight:bold;text-transform: uppercase; letter-spacing:0.6px;" valign="middle" height="34" align="center">
+                                                <a href="https://click.e.yanmartractor.com/?qs=f1af8890686723dabab9ca21933eba4698131192c266fb667513def87d21276f06f474a33f1a53a82cd81cd8e01c993aac834fa1b9fd691f" target="_blank" style="text-decoration:none;display:block;line-height:34px;color:#ffffff;">JOIN THE COMMUNITY</a>
+                                              </td>
+                                            </tr>
+                                          </table>
+                                        </td>
+                                      </tr>
+                                    </table>
+                                  </td>
+                                </tr>
+                              </table>
+                            </td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                  </table>
+                </th>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td height="40" style="height:40px;" class="em_h20">
+            <img alt="" src="https://image.e.yanmartractor.com/lib/fe3811727364047d7c1471/m/1/aea1bc45-589c-4481-8894-dcd4121e060f.gif" style="display: block;" width="1" height="1" border="0">
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table></td></tr></table>
+</td></tr></table><table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="min-width: 100%; " class="stylingblock-content-wrapper"><tr><td class="stylingblock-content-wrapper camarker-inner"><table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="min-width: 100%; " class="stylingblock-content-wrapper">
+              <tr>
+                <td class="stylingblock-content-wrapper camarker-inner"><table class="em_main_table" style="width:600px;" width="600" cellspacing="0" cellpadding="0" border="0" align="center">
+                    <tr>
+                      <td valign="top" align="center"><table width="100%" cellspacing="0" cellpadding="0" border="0">
+                          <tr>
+                            <td style="height:246px; background:url(https://image.e.yanmartractor.com/lib/fe3811727364047d7c1471/m/1/d0ebbe2c-dc35-4c69-b7d4-14b801f1509f.jpg); background-repeat:no-repeat; background-position:center top; background-size: cover; " valign="top" height="246" background="https://image.e.yanmartractor.com/lib/fe3811727364047d7c1471/m/1/d0ebbe2c-dc35-4c69-b7d4-14b801f1509f.jpg" align="center"><!--[if gte mso 9]>   <v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false" style="width:600px;height:246px;">     <v:fill type="frame" src="https://image.e.yanmartractor.com/lib/fe3811727364047d7c1471/m/1/d0ebbe2c-dc35-4c69-b7d4-14b801f1509f.jpg" color="#ffffff" />     <v:textbox inset="0,0,0,0">   <![endif]-->
+                              
+                              <table width="100%" cellspacing="0" cellpadding="0" border="0">
+                                <tr>
+                                  <td class="em_side15" style="width: 40px;" width="40"><img alt="" src="https://image.e.yanmartractor.com/lib/fe3811727364047d7c1471/m/1/aea1bc45-589c-4481-8894-dcd4121e060f.gif" style="display: block;" width="1" height="1" border="0"></td>
+                                  <td valign="top" align="left"><table class="em_wrapper" style="width: 520px;" width="520" cellspacing="0" cellpadding="0" border="0" align="left">
+                                      <tr>
+                                        <td style="height: 30px; font-size: 0px; line-height: 0px;" height="30"><img alt="" src="https://image.e.yanmartractor.com/lib/fe3811727364047d7c1471/m/1/aea1bc45-589c-4481-8894-dcd4121e060f.gif" style="display: block;" width="1" height="1" border="0"></td>
+                                      </tr>
+                                      <tr>
+                                        <td class="em_defaultlink" style=" color: #ffffff; font-family: Arial, sans-serif; font-size: 23px; line-height: 27px; font-weight: 700; letter-spacing:2px;" valign="top" align="center">Explore Our Latest <span style="white-space: nowrap;">Exclusive&nbsp;Offers</span></td>
+                                      </tr>
+                                      <tr>
+                                        <td style="height: 10px;font-size:0px;line-height:0px;" height="10"><img alt="" src="https://image.e.yanmartractor.com/lib/fe3811727364047d7c1471/m/1/aea1bc45-589c-4481-8894-dcd4121e060f.gif" style="display: block;" width="1" height="1" border="0"></td>
+                                      </tr>
+                                      <tr>
+                                        <td class="em_defaultlink" style=" color: #ffffff; font-family: Arial, sans-serif; font-size: 14px; line-height: 18px; font-weight:400;" valign="top" align="center">Want to get the best price possible on Yanmar tractors and attachments? We have new exclusive offers and cash rebates each month that provide serious savings you won’t find <span style="white-space: nowrap;">anywhere&nbsp;else.</span><br>
+                                          <br>
+                                          Click below to see what’s <span style="white-space: nowrap;">currently&nbsp;available.</span></td>
+                                      </tr>
+                                      <tr>
+                                        <td style="height: 25px; font-size: 0px; line-height: 0px;" height="25"><img alt="" src="https://image.e.yanmartractor.com/lib/fe3811727364047d7c1471/m/1/aea1bc45-589c-4481-8894-dcd4121e060f.gif" style="display: block;" width="1" height="1" border="0"></td>
+                                      </tr>
+                                      <tr>
+                                        <td valign="top" align="left"><table align="center" border="0" cellspacing="0" cellpadding="0" class="em_wrapper">
+                                            <tr>
+                                              <td align="center" valign="top"><table style="width:192px;background-color:#ffffff; box-shadow: 0px 5px 10px 0px rgba(167,23,42,1); " width="192" cellspacing="0" cellpadding="0" border="0" bgcolor="#dc1e37" align="center">
+                                                  <tr>
+                                                    <td class="em_defaultlink em_cta_font" style="color:#dc1e37;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:16px;height:34px;font-weight:bold;text-transform: uppercase; letter-spacing:0.6px;" valign="middle" height="34" align="center"><a href="https://click.e.yanmartractor.com/?qs=f1af8890686723da9ca017ae2a26d81f2a5ddb61494eeb8b652889b9fecfe4214945fb60d086a27e92e4ab7f9256fdff9d59a7f283ace272" target="_blank" style="text-decoration:none;display:block;line-height:34px;color:#dc1e37;">EXPLORE OFFERS</a></td>
+                                                  </tr>
+                                                </table></td>
+                                            </tr>
+                                          </table></td>
+                                      </tr>
+                                      <tr>
+                                        <td style="height: 30px; font-size: 0px; line-height: 0px;" height="30"><img alt="" src="https://image.e.yanmartractor.com/lib/fe3811727364047d7c1471/m/1/aea1bc45-589c-4481-8894-dcd4121e060f.gif" style="display: block;" width="1" height="1" border="0"></td>
+                                      </tr>
+                                    </table></td>
+                                  <td class="em_side15" style="width: 40px;" width="40"><img alt="" src="https://image.e.yanmartractor.com/lib/fe3811727364047d7c1471/m/1/aea1bc45-589c-4481-8894-dcd4121e060f.gif" style="display: block;" width="1" height="1" border="0"></td>
+                                </tr>
+                              </table>
+                              
+                              <!--[if gte mso 9]>     </v:textbox>   </v:rect>   <![endif]--></td>
+                          </tr>
+                        </table></td>
+                    </tr>
+                  </table></td>
+              </tr>
+            </table></td></tr></table><table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="min-width: 100%; " class="stylingblock-content-wrapper"><tr><td class="stylingblock-content-wrapper camarker-inner"><table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="min-width: 100%; " class="stylingblock-content-wrapper">
+              <tr>
+                <td class="stylingblock-content-wrapper camarker-inner"><table role="presentation" style="min-width: 100%; " class="stylingblock-content-wrapper" width="100%" cellspacing="0" cellpadding="0" border="0">
+                    <tr>
+                      <td class="stylingblock-content-wrapper camarker-inner"><table align="center" width="600" border="0" cellspacing="0" cellpadding="0" class="em_wrapper" style="width: 600px;" bgcolor="#f5f5f5">
+                          <tr>
+                            <td height="20" style="height:20px;" class="em_h20"><img alt="" src="https://image.e.yanmartractor.com/lib/fe3811727364047d7c1471/m/1/aea1bc45-589c-4481-8894-dcd4121e060f.gif" style="display: block;" width="1" height="1" border="0"></td>
+                          </tr>
+                          <tr>
+                            <td align="center" valign="top" style="padding:0px 18px 0px 38px;" class="em_aside10"><table align="center" width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <tr>
+                                  <th align="left" valign="top" class="em_clear"> <table width="238" align="left" border="0" cellspacing="0" cellpadding="0" class="em_wrapper" style="width: 238px;">
+                                      <tr>
+                                        <td align="center" valign="top"><a href="https://click.e.yanmartractor.com/?qs=f1af8890686723dabe1ad94da3fceac384508f6fc6e8ceb466f8ed6e0b7c2e6bdaf69e26a2f3f50863796505d596ac412e663feb1a3171fa" style="text-decoration: none;" target="_blank"><img alt="" src="https://image.e.yanmartractor.com/lib/fe3811727364047d7c1471/m/1/a82b10f3-3e96-4772-8cc5-a3201a448275.gif" style="display: block; width: 238px; height: 217px; color: #000000;" width="238" height="217" border="0"></a></td>
+                                      </tr>
+                                    </table>
+                                  </th>
+                                  <th align="right" valign="top" class="em_clear"> <table width="306" align="right" border="0" cellspacing="0" cellpadding="0" class="em_wrapper" style="width: 306px;">
+                                      <tr>
+                                        <td align="center" valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                            <tr>
+                                              <td width="30" style="width:30px;" class="em_hide"><img alt="" src="https://image.e.yanmartractor.com/lib/fe3811727364047d7c1471/m/1/aea1bc45-589c-4481-8894-dcd4121e060f.gif" style="display: block;" width="1" height="1" border="0"></td>
+                                              <td align="center" valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                  <tr>
+                                                    <td height="40" style="height:40px; font-size:0px; line-height:0px;" class="em_h20"><img alt="" src="https://image.e.yanmartractor.com/lib/fe3811727364047d7c1471/m/1/aea1bc45-589c-4481-8894-dcd4121e060f.gif" style="display: block;" width="1" height="1" border="0"></td>
+                                                  </tr>
+                                                  <tr>
+                                                    <td class="em_defaultlink em_center" style=" color: #dc1e37; font-family:Arial, sans-serif; font-size: 23px; line-height: 27px; font-weight:bold;" valign="top" align="left">Custom Tractor Builder</td>
+                                                  </tr>
+                                                  <tr>
+                                                    <td height="13" style="height:13px; font-size:0px; line-height:0px;"><img alt="" src="https://image.e.yanmartractor.com/lib/fe3811727364047d7c1471/m/1/aea1bc45-589c-4481-8894-dcd4121e060f.gif" style="display: block;" width="1" height="1" border="0"></td>
+                                                  </tr>
+                                                  <tr>
+                                                    <td class="em_defaultlink em_center" style=" color: #000000; font-family:Arial, sans-serif; font-size: 14px; line-height: 18px; font-weight: normal;" valign="top" align="left">Design your dream machine - from tire treads to <span style="white-space: nowrap;">attachments - in</span> just a <span style="white-space: nowrap;">few&nbsp;clicks.</span></td>
+                                                  </tr>
+                                                  <tr>
+                                                    <td height="19" style="height:19px; font-size:0px; line-height:0px;"><img alt="" src="https://image.e.yanmartractor.com/lib/fe3811727364047d7c1471/m/1/aea1bc45-589c-4481-8894-dcd4121e060f.gif" style="display: block;" width="1" height="1" border="0"></td>
+                                                  </tr>
+                                                  <tr>
+                                                    <td valign="top" align="left"><table align="left" border="0" cellspacing="0" cellpadding="0" class="em_wrapper">
+                                                        <tr>
+                                                          <td align="center" valign="top"><table style="width:230px;background-color:#dc1e37; box-shadow: 0px 5px 10px 0px rgba(191,191,191,1);                                                         " width="230" cellspacing="0" cellpadding="0" border="0" bgcolor="#dc1e37" align="center">
+                                                              <tr>
+                                                                <td class="em_defaultlink em_cta_font" style="color:#ffffff;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:16px;height:34px;font-weight:bold;text-transform: uppercase; letter-spacing:0.6px;" valign="middle" height="34" align="center"><a href="https://click.e.yanmartractor.com/?qs=f1af8890686723dabe1ad94da3fceac384508f6fc6e8ceb466f8ed6e0b7c2e6bdaf69e26a2f3f50863796505d596ac412e663feb1a3171fa" target="_blank" style="text-decoration:none;display:block;line-height:34px;color:#ffffff;">BUILD MY TRACTOR</a></td>
+                                                              </tr>
+                                                            </table></td>
+                                                        </tr>
+                                                      </table></td>
+                                                  </tr>
+                                                </table></td>
+                                            </tr>
+                                          </table></td>
+                                      </tr>
+                                    </table></th>
+                                </tr>
+                              </table></td>
+                          </tr>
+                          <tr>
+                            <td height="20" style="height:20px;" class="em_h20"><img alt="" src="https://image.e.yanmartractor.com/lib/fe3811727364047d7c1471/m/1/aea1bc45-589c-4481-8894-dcd4121e060f.gif" style="display: block;" width="1" height="1" border="0"></td>
+                          </tr>
+                        </table></td>
+                    </tr>
+                  </table>
+                  </td>
+              </tr>
+            </table></td></tr></table><table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="min-width: 100%; " class="stylingblock-content-wrapper"><tr><td class="stylingblock-content-wrapper camarker-inner"><table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="min-width: 100%; " class="stylingblock-content-wrapper">
+              <tr>
+                <td class="stylingblock-content-wrapper camarker-inner"> </td>
+              </tr>
+            </table></td></tr></table><table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="min-width: 100%; " class="stylingblock-content-wrapper"><tr><td class="stylingblock-content-wrapper camarker-inner"><table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="min-width: 100%; " class="stylingblock-content-wrapper">
+              <tr>
+                <td class="stylingblock-content-wrapper camarker-inner"><table align="center" width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                      <td align="center" valign="top" style="padding:0px 28px 0px 38px;" class="em_aside10"><table align="center" width="100%" border="0" cellspacing="0" cellpadding="0">
+                          <tr>
+                            <td height="30" style="height:30px;" class="em_h20"><img alt="" src="https://image.e.yanmartractor.com/lib/fe3811727364047d7c1471/m/1/aea1bc45-589c-4481-8894-dcd4121e060f.gif" style="display: block;" width="1" height="1" border="0"></td>
+                          </tr>
+                          <tr>
+                            <td class="em_defaultlink em_center" style=" color: #dc1e37; font-family:Arial, sans-serif; font-size: 23px; line-height: 27px; font-weight:bold;" valign="top" align="left">Connect With Yanmar</td>
+                          </tr>
+                          <tr>
+                            <td height="17" style="height:17px; font-size:0px; line-height:0px;"><img alt="" src="https://image.e.yanmartractor.com/lib/fe3811727364047d7c1471/m/1/aea1bc45-589c-4481-8894-dcd4121e060f.gif" style="display: block;" width="1" height="1" border="0"></td>
+                          </tr>
+                          <tr>
+                            <td class="em_defaultlink em_center" style=" color: #000000; font-family:Arial, sans-serif; font-size: 14px; line-height: 18px; " valign="top" align="left">Our dedicated Customer Experience Team is here to assist you with all things Yanmar, from maintenance tips to purchasing questions. Whatever you need, we’re just a call or <span style="white-space: nowrap;">click&nbsp;away.</span></td>
+                          </tr>
+                          <tr>
+                            <td height="25" style="height:25px; font-size:0px; line-height:0px;"><img alt="" src="https://image.e.yanmartractor.com/lib/fe3811727364047d7c1471/m/1/aea1bc45-589c-4481-8894-dcd4121e060f.gif" style="display: block;" width="1" height="1" border="0"></td>
+                          </tr>
+                          <tr>
+                            <td valign="top" align="left"><table align="left" border="0" cellspacing="0" cellpadding="0" class="em_wrapper">
+                                <tr>
+                                  <th align="left" valign="top" class="em_clear"> <table align="left" border="0" cellspacing="0" cellpadding="0" class="em_wrapper">
+                                      <tr>
+                                        <td align="center" valign="top"><table style="width:162px;background-color:#dc1e37; box-shadow: 0px 5px 10px 0px rgba(191,191,191,1);                                       " width="162" cellspacing="0" cellpadding="0" border="0" bgcolor="#dc1e37" align="center">
+                                            <tr>
+                                              <td class="em_defaultlink em_cta_font" style="color:#ffffff;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:16px;height:34px;font-weight:700; text-transform: uppercase; letter-spacing:0.6px;" valign="middle" height="34" align="center"><a href="https://click.e.yanmartractor.com/?qs=f1af8890686723daa00aee532c8521494dc7cb50f646833ff81d53b1ae73d8f26124caaa2063fc2799978750067bf604bb07043b716cd9ed" target="_blank" style="text-decoration:none;display:block;line-height:34px;color:#ffffff;">SEND EMAIL</a></td>
+                                            </tr>
+                                          </table></td>
+                                      </tr>
+                                    </table>
+                                  </th>
+                                  <th align="right" valign="top" class="em_clear"> <table align="right" border="0" cellspacing="0" cellpadding="0" class="em_wrapper">
+                                      <tr>
+                                        <td width="24" style="width:24px;" class="em_hide"><img alt="" src="https://image.e.yanmartractor.com/lib/fe3811727364047d7c1471/m/1/aea1bc45-589c-4481-8894-dcd4121e060f.gif" style="display: block;" width="1" height="1" border="0"></td>
+                                        <td align="center" valign="top" class="em_ptop"><table style="width:212px;background-color:#dc1e37; box-shadow: 0px 5px 10px 0px rgba(191,191,191,1);                                       " width="212" cellspacing="0" cellpadding="0" border="0" bgcolor="#dc1e37" align="center">
+                                            <tr>
+                                              <td class="em_defaultlink em_cta_font" style="color:#ffffff;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:16px;height:34px;font-weight:700; text-transform: uppercase; letter-spacing:0.6px;" valign="middle" height="34" align="center"><a href="tel:+7706370441" target="_blank" style="text-decoration:none;display:block;line-height:34px;color:#ffffff;">CALL 770-637-0441</a></td>
+                                            </tr>
+                                          </table></td>
+                                      </tr>
+                                    </table>
+                                  </th>
+                                </tr>
+                              </table></td>
+                          </tr>
+                          <tr>
+                            <td height="35" style="height:35px;" class="em_h20"><img alt="" src="https://image.e.yanmartractor.com/lib/fe3811727364047d7c1471/m/1/aea1bc45-589c-4481-8894-dcd4121e060f.gif" style="display: block;" width="1" height="1" border="0"></td>
+                          </tr>
+                        </table></td>
+                    </tr>
+                  </table></td>
+              </tr>
+            </table></td></tr></table>
+                
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+    <!-- == //Body Section == --> 
+    <!-- == Footer Section == -->
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="em_full_wrap" bgcolor="#EFEFEF" style="table-layout:fixed;background-color:#EFEFEF;">
+      <tr>
+        <td align="center" valign="top">
+          <table align="center" width="600" border="0" cellspacing="0" cellpadding="0" class="em_main_table" style="width:600px; table-layout:fixed;background-color:#ffffff;" bgcolor="#ffffff">
+            <tr>
+              <td align="center" valign="top">
+                <table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="min-width: 100%; " class="stylingblock-content-wrapper"><tr><td class="stylingblock-content-wrapper camarker-inner"><table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="min-width: 100%; " class="stylingblock-content-wrapper">
+              <tr>
+                <td class="stylingblock-content-wrapper camarker-inner"><table align="center" width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                      <td align="center" valign="top"><table align="center" width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#dc1e37">
+                          <tr>
+                            <td align="center" valign="top" style="padding:0px 38px;" class="em_aside10"><table align="center" width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <tr>
+                                  <td height="20" style="height:20px; font-size:0px; line-height:0px;" class="em_h20"><img alt="" src="https://image.e.yanmartractor.com/lib/fe3811727364047d7c1471/m/1/aea1bc45-589c-4481-8894-dcd4121e060f.gif" style="display: block;" width="1" height="1" border="0"></td>
+                                </tr>
+                                <tr>
+                                  <td align="center" valign="top"><table align="center" border="0" cellspacing="0" cellpadding="0">
+                                      <tr>
+                                        <td align="center" valign="middle"><a href="https://click.e.yanmartractor.com/?qs=f1af8890686723da20df7ed36e91a5484d1acbc38b3a3f12a90114aeae15a6daba28cb1dd6d9f196ef9248efb31006c782de5ef4ba6345a8" style="text-decoration: none;" target="_blank"><img alt="fb" src="https://image.e.yanmartractor.com/lib/fe3811727364047d7c1471/m/1/73a6e983-ba40-4626-b2fd-93147165bd25.png" style="display: block; max-width: 24px; color: #000000; font-size: 12px; font-family: Arial, sans-serif; text-align: center; height: 24px; width: 24px;" width="24" height="24" border="0"></a></td>
+                                        <td width="42" style="width:42px;"><img alt="" src="https://image.e.yanmartractor.com/lib/fe3811727364047d7c1471/m/1/aea1bc45-589c-4481-8894-dcd4121e060f.gif" style="display: block;" width="1" height="1" border="0"></td>
+                                        <td align="center" valign="middle"><a href="https://click.e.yanmartractor.com/?qs=f1af8890686723dabab9ca21933eba4698131192c266fb667513def87d21276f06f474a33f1a53a82cd81cd8e01c993aac834fa1b9fd691f" style="text-decoration: none;" target="_blank"><img alt="insta" src="https://image.e.yanmartractor.com/lib/fe3811727364047d7c1471/m/1/d98a2a3c-db20-4fc1-a71f-503e5e024141.png" style="display: block; max-width: 24px; color: #000000; font-size: 12px; font-family: Arial, sans-serif; text-align: center; height: 24px; width: 24px;" width="24" height="24" border="0"></a></td>
+                                        <td width="42" style="width:42px;"><img alt="" src="https://image.e.yanmartractor.com/lib/fe3811727364047d7c1471/m/1/aea1bc45-589c-4481-8894-dcd4121e060f.gif" style="display: block;" width="1" height="1" border="0"></td>
+                                        <td align="center" valign="middle"><a href="https://click.e.yanmartractor.com/?qs=f1af8890686723da69beed5bf5615b0b91a624da281465bd3938a40a71c4a996f27ceac0d51e87e3c3866d390f94d1cd605fb40a4a32313c" style="text-decoration: none;" target="_blank"><img alt="in" src="https://image.e.yanmartractor.com/lib/fe3811727364047d7c1471/m/1/c7a6cefc-f6fd-4b27-bdbe-1b7551c10572.png" style="display: block; max-width: 26px; color: #000000; font-size: 12px; font-family: Arial, sans-serif; text-align: center; height: 24px; width: 26px;" width="26" height="24" border="0"></a></td>
+                                        <td width="42" style="width:42px;"><img alt="" src="https://image.e.yanmartractor.com/lib/fe3811727364047d7c1471/m/1/aea1bc45-589c-4481-8894-dcd4121e060f.gif" style="display: block;" width="1" height="1" border="0"></td>
+                                        <td align="center" valign="middle"><a href="https://click.e.yanmartractor.com/?qs=f1af8890686723da1b04dc88e61e9e5404e5528194a979e312b716dc1495086e127485d66833d974064b9e2d5d36f1db52176a21a50989f5" style="text-decoration: none;" target="_blank"><img alt="yt" src="https://image.e.yanmartractor.com/lib/fe3811727364047d7c1471/m/1/b9e1efe0-73b0-4eaa-a6a3-ea5332701228.png" style="display: block; max-width: 27px; color: #000000; font-size: 12px; font-family: Arial, sans-serif; text-align: center; height: 19px; width: 27px;" width="27" height="19" border="0"></a></td>
+                                      </tr>
+                                    </table></td>
+                                </tr>
+                                <tr>
+                                  <td height="20" style="height:20px; font-size:0px; line-height:0px;" class="em_h20"><img alt="" src="https://image.e.yanmartractor.com/lib/fe3811727364047d7c1471/m/1/aea1bc45-589c-4481-8894-dcd4121e060f.gif" style="display: block;" width="1" height="1" border="0"></td>
+                                </tr>
+                              </table></td>
+                          </tr>
+                        </table></td>
+                    </tr>
+                    <tr>
+                      <td align="center" valign="top" style="padding:0px 38px;" class="em_aside10"><table align="center" width="100%" border="0" cellspacing="0" cellpadding="0">
+                          <tr>
+                            <td height="42" style="height:42px;" class="em_h20"><img alt="" src="https://image.e.yanmartractor.com/lib/fe3811727364047d7c1471/m/1/aea1bc45-589c-4481-8894-dcd4121e060f.gif" style="display: block;" width="1" height="1" border="0"></td>
+                          </tr>
+                          <tr>
+                            <td align="center" valign="top"><a href="https://click.e.yanmartractor.com/?qs=f1af8890686723da4c1a045e7d855a92f245f099918aa947eb3f7400da80d191022e5d69c00142cf2b7f99e37907b459b1af3a73415fce74" style="text-decoration: none;" target="_blank"><img alt="YANMAR" src="https://image.e.yanmartractor.com/lib/fe3811727364047d7c1471/m/1/2f64f4cb-65ef-454a-b5d4-0654d04b7b35.png" style="display: block; max-width: 256px; color: #000000; font-size: 12px; font-family: Arial, sans-serif; text-align: center; height: 31px; width: 256px;" width="256" height="31" border="0"></a></td>
+                          </tr>
+                          <tr>
+                            <td height="32" style="height:32px;" class="em_h20"><img alt="" src="https://image.e.yanmartractor.com/lib/fe3811727364047d7c1471/m/1/aea1bc45-589c-4481-8894-dcd4121e060f.gif" style="display: block;" width="1" height="1" border="0"></td>
+                          </tr>
+                          <tr>
+                            <td class="em_defaultlink" style=" color: #000000; font-family:Arial, sans-serif; font-size: 12px; line-height: 18px; " valign="top" align="center">Yanmar America Corporation <br>
+                              <strong>All rights reserved.Yanmar America<br>
+                              </strong>101 International Pkwy <br>
+                              Adairsville, GA 30103 US </td>
+                          </tr>
+                          <tr>
+                            <td height="21" style="height:21px; font-size:0px; line-height:0px;" class="em_h20"><img alt="" src="https://image.e.yanmartractor.com/lib/fe3811727364047d7c1471/m/1/aea1bc45-589c-4481-8894-dcd4121e060f.gif" style="display: block;" width="1" height="1" border="0"></td>
+                          </tr>
+                          <tr>
+                            <td class="em_defaultlink" style=" color: #000000; font-family:Arial, sans-serif; font-size: 12px; line-height: 18px; " valign="top" align="center">You are receiving this email because you are subscribed to Yanmar Tractor <br class="em_hide">
+                              communications. If you no longer wish to receive these emails, <a href="https://click.e.yanmartractor.com/?qs=f1af8890686723daedcf24530b6e9bcf8c4be0b59b672eefe733f01f3e98322422075471eefb4dc81ed89440192e209226bc12fbfbb0f627"  target="_blank" style="text-decoration:underline; color: #000000;">click here</a>. <br>
+                              If you would like to personalize your experience, please <a href="https://click.e.yanmartractor.com/?qs=f1af8890686723da4e7e0b82790b35727222120ad4b068f69ae48a637030088f80ac9a797b49476f4168269b3122f4c6b1ef0b6a176b4332"  target="_blank" style="text-decoration:underline;  color: #000000;">update&nbsp;your&nbsp;preferences</a>. <br>
+                              <br>
+                              <a href="https://click.e.yanmartractor.com/?qs=f1af8890686723da8911fbb55516364a8b1e69a308920a2e42b9e170817dd197dfb9161900620fc89787b5a04ff03db612e764c5d4d027d1" target="_blank" style="text-decoration:underline; color: #000000;">Terms of use</a> | <a href="https://click.e.yanmartractor.com/?qs=f1af8890686723da38a44d2ed6771a64465e424b906775159439dc474ba65fed4899926d3df6e99d397eb69af0b97e6afc1a904493ceaa80" target="_blank" style="text-decoration:underline; color: #000000;">Privacy</a></td>
+                          </tr>
+                          <tr>
+                            <td height="30" style="height:30px;" class="em_h20"><img alt="" src="https://image.e.yanmartractor.com/lib/fe3811727364047d7c1471/m/1/aea1bc45-589c-4481-8894-dcd4121e060f.gif" style="display: block;" width="1" height="1" border="0"></td>
+                          </tr>
+                        </table></td>
+                    </tr>
+                  </table></td>
+              </tr>
+            </table></td></tr></table>
+                
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+       <tr>
+        <td style="height:0px;line-height:0px;font-size:0px;" height="0">
+          <span style="display:none;opacity:0;color:#ffffff;width:0px">https://click.e.yanmartractor.com/profile_center.aspx?qs=9900ad54940a70349f952782ab7d7b870b3f08337b852b6b438e004bf7586b5850a330bcf4167957df89b4bf136fc333</span>
+        </td>
+      </tr>
+    </table>
+    <!-- == //Footer Section == -->
+    <img src="https://click.e.yanmartractor.com/open.aspx?ffcb10-fecb127271670478-fe5c12707d6303797614-fe3811727364047d7c1471-ff6115757d-fe5712797361077e7712-ffcd16&d=120029&bmt=0" width="1" height="1" alt="">
+  </body>
+</html>
+
+--zvUob5wWwh2a=_?:--
+

@@ -1,0 +1,32 @@
+[project]
+name = "email_qa"
+version = "0.1.0"
+description = "email_qa using crewAI"
+authors = [{ name = "Your Name", email = "you@example.com" }]
+requires-python = ">=3.10,<3.14"
+dependencies = [
+    "beautifulsoup4>=4.14.2",
+    "crewai[tools]>=0.201.1,<1.0.0",
+    "lxml>=6.0.2",
+    "pymupdf>=1.26.4",
+    "requests>=2.32.5",
+]
+
+[project.scripts]
+email_qa = "email_qa.main:run"
+run_crew = "email_qa.main:run"
+train = "email_qa.main:train"
+replay = "email_qa.main:replay"
+test = "email_qa.main:test"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.crewai]
+type = "crew"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.4.2",
+]
