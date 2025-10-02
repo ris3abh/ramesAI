@@ -54,6 +54,13 @@ import chardet
 import logging
 from pathlib import Path
 
+import docx  # python-docx
+import PyPDF2  # pypdf2
+import openpyxl  # openpyxl
+import io
+from docx import Document
+from PyPDF2 import PdfReader
+
 # Set up logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -99,48 +106,56 @@ class UniversalDocumentParser:
         logger.info("Initialized UniversalDocumentParser")
     
     def parse_document(self, 
-                       content: Union[str, bytes], 
-                       filename: Optional[str] = None) -> Dict[str, Any]:
+                    content: Union[str, bytes], 
+                    filename: Optional[str] = None) -> Dict[str, Any]:
         """
         Parse any document format to extract email requirements.
-        
-        This is the main entry point that detects format and delegates
-        to appropriate parsing method.
         
         Args:
             content (Union[str, bytes]): Document content to parse
             filename (Optional[str]): Original filename for format detection
             
         Returns:
-            Dict[str, Any]: Extracted requirements with structure:
-                - subject_lines: List of subject variations
-                - preview_text: Preview text
-                - ctas: List of CTA dictionaries
-                - segments: Segment requirements
-                - etc.
+            Dict[str, Any]: Extracted requirements structure
         """
         # Reset tracking
         self.encoding_issues_found = []
         
-        # Handle bytes content - detect and decode
+        # CRITICAL: Handle binary formats BEFORE any text decoding
         if isinstance(content, bytes):
-            detected = chardet.detect(content)
-            encoding = detected.get('encoding', 'utf-8')
-            confidence = detected.get('confidence', 0)
+            if filename:
+                file_ext = Path(filename).suffix.lower()
+                
+                # Handle binary document formats directly
+                if file_ext == '.docx':
+                    return self._parse_docx_binary(content)
+                elif file_ext == '.pdf':
+                    return self._parse_pdf_binary(content)
+                elif file_ext in ['.xlsx', '.xls']:
+                    return self._parse_excel_binary(content)
             
-            logger.info(f"Detected encoding: {encoding} (confidence: {confidence:.2%})")
-            
+            # Only for text formats - detect and decode
             try:
+                detected = chardet.detect(content)
+                encoding = detected.get('encoding', 'utf-8')
+                confidence = detected.get('confidence', 0)
+                
+                logger.info(f"Detected encoding: {encoding} (confidence: {confidence:.2%})")
+                
                 content = content.decode(encoding, errors='replace')
             except (UnicodeDecodeError, TypeError):
-                # Fallback to UTF-8 with error replacement
                 content = content.decode('utf-8', errors='replace')
-                logger.warning("Failed to decode with detected encoding, using UTF-8 fallback")
+                logger.warning("Failed to decode, using UTF-8 fallback")
         
-        # Fix encoding issues
+        # Size check after decoding
+        if len(content) > 500000:  # 500KB text limit
+            logger.warning(f"Large document ({len(content)} chars), truncating")
+            content = content[:500000] + "\n[TRUNCATED - Document exceeded size limit]"
+        
+        # Fix encoding issues in text
         content = self._fix_encoding(content)
         
-        # Detect format and parse
+        # Text-based format detection and parsing
         if filename:
             file_ext = Path(filename).suffix.lower()
             
@@ -148,9 +163,6 @@ class UniversalDocumentParser:
                 return self._parse_eml_format(content)
             elif file_ext == '.html':
                 return self._parse_html_requirements(content)
-            elif file_ext in ['.docx', '.pdf', '.xlsx']:
-                logger.warning(f"Format {file_ext} not yet implemented, parsing as text")
-                return self._parse_text_requirements(content)
         
         # Auto-detect format from content
         if self._is_html(content):
@@ -159,6 +171,133 @@ class UniversalDocumentParser:
             return self._parse_eml_format(content)
         else:
             return self._parse_text_requirements(content)
+
+    def _parse_docx_binary(self, content: bytes) -> Dict[str, Any]:
+        """Extract requirements from DOCX binary content."""
+        try:
+            # Create document from bytes
+            doc = Document(io.BytesIO(content))
+            
+            # Extract all text from paragraphs
+            text_content = []
+            for paragraph in doc.paragraphs:
+                if paragraph.text.strip():
+                    text_content.append(paragraph.text.strip())
+            
+            # Extract text from tables if any
+            for table in doc.tables:
+                for row in table.rows:
+                    for cell in row.cells:
+                        if cell.text.strip():
+                            text_content.append(cell.text.strip())
+            
+            # Join all text and parse as requirements
+            full_text = '\n'.join(text_content)
+            
+            if len(full_text) > 500000:  # Size limit
+                logger.warning(f"Large DOCX content ({len(full_text)} chars), truncating")
+                full_text = full_text[:500000] + "\n[TRUNCATED]"
+            
+            logger.info(f"Extracted {len(full_text)} characters from DOCX")
+            return self._parse_text_requirements(full_text)
+            
+        except Exception as e:
+            logger.error(f"DOCX parsing failed: {e}")
+            return {
+                'subject_lines': [],
+                'preview_text': '',
+                'from_name': '',
+                'from_email': '',
+                'ctas': [],
+                'links': [],
+                'segments': {},
+                'content_modules': [],
+                'special_notes': [f"DOCX parsing failed: {str(e)}"],
+                'encoding_fixed': False,
+                'encoding_issues': []
+            }
+
+    def _parse_pdf_binary(self, content: bytes) -> Dict[str, Any]:
+        """Extract requirements from PDF binary content."""
+        try:
+            pdf_reader = PdfReader(io.BytesIO(content))
+            
+            text_content = []
+            for page in pdf_reader.pages:
+                page_text = page.extract_text()
+                if page_text.strip():
+                    text_content.append(page_text.strip())
+            
+            full_text = '\n'.join(text_content)
+            
+            if len(full_text) > 500000:  # Size limit
+                logger.warning(f"Large PDF content ({len(full_text)} chars), truncating")
+                full_text = full_text[:500000] + "\n[TRUNCATED]"
+            
+            logger.info(f"Extracted {len(full_text)} characters from PDF")
+            return self._parse_text_requirements(full_text)
+            
+        except Exception as e:
+            logger.error(f"PDF parsing failed: {e}")
+            return {
+                'subject_lines': [],
+                'preview_text': '',
+                'from_name': '',
+                'from_email': '',
+                'ctas': [],
+                'links': [],
+                'segments': {},
+                'content_modules': [],
+                'special_notes': [f"PDF parsing failed: {str(e)}"],
+                'encoding_fixed': False,
+                'encoding_issues': []
+            }
+
+    def _parse_excel_binary(self, content: bytes) -> Dict[str, Any]:
+        """Extract requirements from Excel binary content."""
+        try:
+            workbook = openpyxl.load_workbook(io.BytesIO(content))
+            
+            text_content = []
+            for sheet_name in workbook.sheetnames:
+                sheet = workbook[sheet_name]
+                
+                # Add sheet name as header
+                text_content.append(f"\n=== Sheet: {sheet_name} ===")
+                
+                for row in sheet.iter_rows(values_only=True):
+                    row_text = []
+                    for cell in row:
+                        if cell is not None:
+                            row_text.append(str(cell).strip())
+                    
+                    if any(row_text):  # Skip empty rows
+                        text_content.append(' | '.join(row_text))
+            
+            full_text = '\n'.join(text_content)
+            
+            if len(full_text) > 500000:  # Size limit  
+                logger.warning(f"Large Excel content ({len(full_text)} chars), truncating")
+                full_text = full_text[:500000] + "\n[TRUNCATED]"
+            
+            logger.info(f"Extracted {len(full_text)} characters from Excel")
+            return self._parse_text_requirements(full_text)
+            
+        except Exception as e:
+            logger.error(f"Excel parsing failed: {e}")
+            return {
+                'subject_lines': [],
+                'preview_text': '',
+                'from_name': '',
+                'from_email': '',
+                'ctas': [],
+                'links': [],
+                'segments': {},
+                'content_modules': [],
+                'special_notes': [f"Excel parsing failed: {str(e)}"],
+                'encoding_fixed': False,
+                'encoding_issues': []
+            }
     
     def _fix_encoding(self, text: str) -> str:
         """
