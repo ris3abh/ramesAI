@@ -1,17 +1,575 @@
-research_task:
-  description: >
-    Conduct a thorough research about {topic}
-    Make sure you find any interesting and relevant information given
-    the current year is {current_year}.
-  expected_output: >
-    A list with 10 bullet points of the most relevant information about {topic}
-  agent: researcher
+# Email QA Tasks Configuration
+# =============================
+# Defines sequential tasks for email QA workflow following CrewAI best practices.
+#
+# References:
+# - Sequential Process: "Tasks are executed one after another, following a linear progression" (crews.md)
+# - Context Sharing: "The output of one task serving as context for the next" (tasks.md)
+# - Expected Output: "Tasks should have specific expected outputs, not vague descriptions" (tasks.md)
+#
+# Process Flow:
+# Task 1 (Extract) → Task 2 (Analyze) → Task 3 (Validate) → Task 4 (Inspect) → Task 5 (Check)
+#
+# Based on Spinutech/Izzy's 12-Point ClickUp QA Checklist:
+# 1. EoA and Klaviyo link ✓ (Task 3)
+# 2. A/B Test ✓ (Task 1 extracts variants)
+# 3. Tracking links separately ✓ (Task 3)
+# 4. Audience List ⚠ (Requires platform API - Phase 2)
+# 5. Suppression Lists ⚠ (Requires platform API - Phase 2)
+# 6. Smart Sending Enabled ⚠ (Requires platform API - Phase 2)
+# 7. Sender Name ✓ (Task 5)
+# 8. Desktop/Mobile Links Clicked ✓ (Task 3)
+# 9. Dark Mode Checked ✓ (Task 4)
+# 10. Module Padding Checked ✓ (Task 4)
+# 11. Scheduled Date/Time ⚠ (Requires platform API - Phase 2)
+# 12. Post Launch Deployment ⚠ (Requires platform API - Phase 2)
+#
+# Current Implementation: 6/12 automated (50%), Platform API needed for remaining 6
 
-reporting_task:
+extract_copy_requirements:
   description: >
-    Review the context you got and expand each topic into a full section for a report.
-    Make sure the report is detailed and contains any and all relevant information.
+    Parse the source copy document (Google Doc or PDF) for campaign: {campaign_name} for client: {client_name}.
+    
+    Extract ALL of the following requirements and organize by segment/version:
+    
+    1. SUBJECT LINES:
+       - List all subject line variations (A/B test variants)
+       - Tag each with segment (Prospects, Owners, Self, Loved One)
+       - Tag each with care type if applicable (Assisted Living, Memory Care, Independent Living)
+       - Note which is Variant A vs Variant B
+    
+    2. PREVIEW TEXT:
+       - Extract preview text for each segment
+       - Match to corresponding subject lines
+    
+    3. CONTENT MODULES:
+       - List all modules by name (e.g., "Module 1 - Field Notes Header")
+       - Note which segments each module applies to (All, Prospects only, Owners only)
+       - Extract key phrases/keywords for each module (for presence validation)
+       - Note module order/sequence
+    
+    4. CALLS TO ACTION (CTAs):
+       - List ALL CTAs with exact text (e.g., "LEARN MORE", "GET STARTED")
+       - Note which segment each CTA applies to
+       - Extract destination URLs for each CTA
+       - Flag if CTA should be uppercase (client requirement)
+    
+    5. LINKS & DESTINATIONS:
+       - Extract all required links with text and destination
+       - Note tracking requirements (UTM parameters, etc.)
+       - Identify phone numbers with proper formatting
+       - Identify social media handles
+    
+    6. DYNAMIC CONTENT:
+       - Identify merge fields/personalization tags (example: community_name, first_name)
+       - Note conditional logic rules (if Assisted Living then show X)
+       - List all possible values for dynamic fields
+    
+    7. COMPLIANCE REQUIREMENTS:
+       - Note if unsubscribe link required
+       - Extract physical address if specified
+       - Note any legal disclaimers required
+    
+    Use the copy document content provided in: {document_content}
+    
+    If multiple versions exist (e.g., 6 Welltower versions for different communities and care types),
+    create a separate requirements object for EACH version.
+  
   expected_output: >
-    A fully fledged report with the main topics, each with a full section of information.
-    Formatted as markdown without '```'
-  agent: reporting_analyst
+    A comprehensive JSON object structured as follows:
+    
+    {
+      "campaign_name": "August Field Notes",
+      "client_name": "Yanmar",
+      "extracted_date": "2025-01-15T10:30:00Z",
+      "total_versions": 2,
+      "versions": [
+        {
+          "version_id": "prospects_8_16",
+          "segment": "prospects",
+          "campaign_date": "2025-08-16",
+          "subject_lines": {
+            "variant_a": "Explore What Yanmar Can Do",
+            "variant_b": "Don't Miss What Yanmar Can Do for You"
+          },
+          "preview_text": "Learn about the attachments and techniques pros use.",
+          "modules": [
+            {
+              "name": "Module 1 - Field Notes Header",
+              "applies_to": ["all"],
+              "keywords": ["FIELD NOTES", "AUGUST 2025"],
+              "required": true
+            },
+            {
+              "name": "Module 2 - UGC (Prospects)",
+              "applies_to": ["prospects"],
+              "keywords": ["Still discovering", "Follow @yanmartractorsamerica"],
+              "required": true
+            }
+          ],
+          "ctas": [
+            {
+              "text": "GET THE DETAILS",
+              "destination": "https://yanmartractor.com/fence-building-guide",
+              "segment": "all",
+              "uppercase_required": true
+            },
+            {
+              "text": "JOIN THE COMMUNITY",
+              "destination": "https://instagram.com/yanmartractorsamerica",
+              "segment": "prospects",
+              "uppercase_required": true
+            }
+          ],
+          "brand_requirements": {
+            "phone": "770-637-0441",
+            "social_handles": {
+              "instagram": "yanmartractorsamerica"
+            },
+            "from_name": "Yanmar Tractors",
+            "from_email": "yanmartractors@e.yanmartractor.com"
+          },
+          "compliance": {
+            "unsubscribe_required": true,
+            "physical_address_required": true,
+            "address": "101 International Pkwy, Adairsville, GA 30103 US"
+          }
+        }
+      ],
+      "extraction_notes": [
+        "Found 2 subject line variants per segment (A/B test)",
+        "Module 2 differs between Prospects and Owners versions",
+        "All CTAs must be UPPERCASE per client guidelines"
+      ]
+    }
+    
+    Include extraction_notes array with any important observations, ambiguities, or warnings.
+
+  agent: copy_document_extractor
+
+analyze_email_content:
+  description: >
+    Parse the final email HTML provided in: {email_content} and compare it against the
+    requirements extracted in the previous task.
+    
+    Perform the following validations:
+    
+    1. SUBJECT LINE VALIDATION:
+       - Extract subject from email headers
+       - Confirm it matches one of the expected variants from requirements
+       - If A/B test, verify both variants are present if applicable
+       - Flag: CRITICAL if subject doesn't match any variant
+    
+    2. PREVIEW TEXT VALIDATION:
+       - Extract preview text from email
+       - Confirm it matches expected preview for the segment
+       - Flag: HIGH if preview text missing or incorrect
+    
+    3. MODULE PRESENCE VALIDATION:
+       - For each required module, check if keywords are present in email body
+       - Verify modules appear in correct order
+       - Check segment-specific modules (Prospects modules shouldn't be in Owners email)
+       - Flag: CRITICAL if required module missing, MEDIUM if order wrong
+    
+    4. CTA TEXT VALIDATION:
+       - Extract all CTA text from email
+       - Compare against required CTAs from requirements
+       - Check if uppercase requirement met (if specified)
+       - Flag: CRITICAL if required CTA missing, HIGH if text incorrect, MEDIUM if not uppercase
+    
+    5. BODY COPY VALIDATION:
+       - Compare email body text against copy document
+       - Flag significant differences (not just punctuation)
+       - Check for placeholder text (lorem ipsum, 555-555-5555, test@test.com)
+       - Flag: CRITICAL if placeholder found, MEDIUM if copy mismatch
+    
+    6. DYNAMIC CONTENT VALIDATION:
+       - Identify merge fields in email (example: community_name, first_name)
+       - Verify they match requirements
+       - Check conditional logic is correctly applied
+       - Flag: HIGH if wrong merge fields used
+    
+    7. BRAND CONSISTENCY:
+       - Verify from_name and from_email match requirements
+       - Check phone number appears and matches (use DynamicRulesEngine)
+       - Verify social media handles are correct
+       - Flag: CRITICAL if phone/email wrong, MEDIUM if social handles wrong
+    
+    Use the EmailParserTool to extract email structure and content.
+    Use the DynamicRulesEngine with client: {client_name} to load client-specific rules.
+    
+    Cross-reference findings with extracted requirements from Task 1.
+  
+  expected_output: >
+    A detailed JSON validation report with pass/fail status and specific issues:
+    
+    {
+      "analysis_timestamp": "2025-01-15T10:35:00Z",
+      "email_version_detected": "prospects_8_16",
+      "overall_status": "FAIL",
+      "critical_issues": 2,
+      "high_issues": 1,
+      "medium_issues": 3,
+      "low_issues": 0,
+      
+      "validations": {
+        "subject_line": {
+          "status": "PASS",
+          "expected": "Explore What Yanmar Can Do",
+          "found": "Explore What Yanmar Can Do",
+          "notes": "Matches Variant A for Prospects segment"
+        },
+        "preview_text": {
+          "status": "PASS",
+          "expected": "Learn about the attachments and techniques pros use.",
+          "found": "Learn about the attachments and techniques pros use.",
+          "notes": "Exact match"
+        },
+        "modules": {
+          "status": "FAIL",
+          "required_modules": ["Field Notes Header", "UGC (Prospects)", "Exclusive Offers"],
+          "found_modules": ["Field Notes Header", "Exclusive Offers"],
+          "missing_modules": ["UGC (Prospects)"],
+          "issues": [
+            {
+              "severity": "CRITICAL",
+              "module": "UGC (Prospects)",
+              "issue": "Required module missing - keywords 'JOIN THE COMMUNITY' not found",
+              "fix": "Add Module 2 - UGC (Prospects) with Instagram CTA"
+            }
+          ]
+        },
+        "ctas": {
+          "status": "FAIL",
+          "required_ctas": ["GET THE DETAILS", "JOIN THE COMMUNITY", "EXPLORE OFFERS"],
+          "found_ctas": ["GET THE DETAILS", "EXPLORE OFFERS"],
+          "missing_ctas": ["JOIN THE COMMUNITY"],
+          "issues": [
+            {
+              "severity": "CRITICAL",
+              "cta": "JOIN THE COMMUNITY",
+              "issue": "Required CTA for Prospects segment not found in email",
+              "fix": "Add 'JOIN THE COMMUNITY' CTA linking to @yanmartractorsamerica"
+            }
+          ]
+        },
+        "body_copy": {
+          "status": "PASS",
+          "differences_found": 0,
+          "placeholder_content_found": false,
+          "notes": "Body copy matches copy document"
+        },
+        "brand_validation": {
+          "status": "PASS",
+          "from_name": {"expected": "Yanmar Tractors", "found": "Yanmar Tractors", "match": true},
+          "from_email": {"expected": "yanmartractors@e.yanmartractor.com", "found": "yanmartractors@e.yanmartractor.com", "match": true},
+          "phone": {"expected": "770-637-0441", "found": "770-637-0441", "match": true},
+          "notes": "All brand elements correct"
+        }
+      },
+      
+      "issues_summary": [
+        {
+          "severity": "CRITICAL",
+          "category": "Module Missing",
+          "description": "Module 2 - UGC (Prospects) not found in email",
+          "impact": "Prospects won't see Instagram community engagement CTA",
+          "action_required": "Add UGC module with 'JOIN THE COMMUNITY' CTA before Module 4"
+        },
+        {
+          "severity": "CRITICAL",
+          "category": "CTA Missing",
+          "description": "Required CTA 'JOIN THE COMMUNITY' not found",
+          "impact": "Missing key conversion opportunity for Prospects segment",
+          "action_required": "Add CTA button with text 'JOIN THE COMMUNITY' linking to Instagram"
+        }
+      ],
+      
+      "recommendations": [
+        "Re-add Module 2 from copy document - appears to have been removed during build",
+        "Verify you're building the Prospects version, not Owners (different modules required)"
+      ]
+    }
+    
+    Group issues by severity: CRITICAL (blocks launch) > HIGH (should fix) > MEDIUM (nice to fix) > LOW (polish).
+    Provide actionable fixes for each issue, not just "this is wrong".
+
+  agent: email_content_analyzer
+  context:
+    - extract_copy_requirements
+
+validate_links_and_ctas:
+  description: >
+    Validate ALL links in the email against requirements and perform HTTP status checks.
+    
+    Use the LinkValidatorTool with inputs from previous tasks to perform:
+    
+    1. HTTP STATUS VALIDATION:
+       - Check each link returns 200 OK status
+       - Handle tracking link redirects (click.e.domain.com, etc.)
+       - Extract final destination URL from tracking wrappers
+       - Test both desktop and mobile versions if applicable
+       - Flag: CRITICAL if 404/500 error, HIGH if slow/timeout, MEDIUM if redirect chain too long
+    
+    2. CTA DESTINATION VALIDATION:
+       - For each CTA, verify destination URL matches requirements
+       - Check staging vs production URLs (staging URLs should never be in production email)
+       - Verify query parameters are correct (?ref=email, etc.)
+       - Flag: CRITICAL if wrong destination, CRITICAL if staging URL found
+    
+    3. UTM PARAMETER VALIDATION:
+       - Check for required UTM parameters (utm_source, utm_medium, utm_campaign)
+       - Verify parameter values match campaign requirements
+       - Note: Some clients use proprietary tracking (Yanmar uses click.e.yanmartractor.com)
+       - Flag: HIGH if UTM missing (analytics impact), MEDIUM if incorrect values
+    
+    4. PHONE NUMBER VALIDATION:
+       - Verify phone numbers use tel: protocol for click-to-call
+       - Check phone number matches brand requirements
+       - Validate formatting (e.g., 770-637-0441 vs 7706370441)
+       - Flag: CRITICAL if phone number wrong, HIGH if tel: protocol missing
+    
+    5. SOCIAL MEDIA LINK VALIDATION:
+       - Check social links go to correct handles (@yanmartractorsamerica not @yanmar)
+       - Verify platform URLs are correct (instagram.com, facebook.com, etc.)
+       - Test that social links open in new tab (target="_blank")
+       - Flag: CRITICAL if wrong handle, MEDIUM if opens in same tab
+    
+    6. TRACKING LINK VALIDATION:
+       - For Salesforce Marketing Cloud tracking links (click.e.domain.com)
+       - Extract and validate final destination from query parameters
+       - Check tracking links aren't broken (common issue with copy/paste)
+       - Flag: CRITICAL if tracking link broken, HIGH if destination can't be determined
+    
+    Use LinkValidatorTool with check_http_status=True for thorough validation.
+    Cross-reference expected destinations from Task 1 requirements.
+    Cross-reference found links from Task 2 email analysis.
+  
+  expected_output: >
+    A comprehensive link validation report with HTTP status and destination checks as detailed JSON.
+    Include working_links count, broken_links count, http_status_check details, cta_destination_check,
+    utm_parameter_check, phone_validation, social_media_validation, and issues_summary.
+    Flag any link issues by severity. Include response times (slow links >2s are user experience issues).
+
+  agent: link_and_cta_validator
+  context:
+    - extract_copy_requirements
+    - analyze_email_content
+
+visual_qa_inspection:
+  description: >
+    Analyze email rendering for visual issues using provided screenshots or by generating
+    screenshots from email HTML at: {email_content}
+    
+    Focus on issues that HTML inspection alone cannot catch.
+    
+    Perform the following visual validations:
+    
+    1. DARK MODE VALIDATION (ClickUp #9):
+       - Analyze dark mode screenshot for color contrast issues
+       - Check text is readable (not white text on white background)
+       - Verify CTA buttons are visible in dark mode
+       - Check that brand colors maintain integrity
+       - Use OCRTool to extract text from dark mode screenshot
+       - Calculate color contrast ratios (WCAG requires 4.5:1 for normal text, 3:1 for large)
+       - Flag: CRITICAL if text unreadable, HIGH if contrast ratio fails WCAG
+    
+    2. MODULE PADDING VALIDATION (ClickUp #10):
+       - Measure spacing between modules using screenshot analysis
+       - Check for consistency (if Module 1 has 40px top padding, all should)
+       - Verify internal module spacing (heading to content)
+       - Check for awkward gaps or overlapping content
+       - Use OCRTool to detect visual spacing inconsistencies
+       - Flag: MEDIUM if padding inconsistent, LOW if minor spacing issues
+    
+    3. RESPONSIVE DESIGN VALIDATION:
+       - Compare desktop vs mobile screenshots side-by-side
+       - Verify mobile layout doesn't break (single column, stacked modules)
+       - Check CTAs are large enough to tap on mobile (44x44px minimum)
+       - Verify images scale properly and don't overflow
+       - Check font sizes are readable on mobile (minimum 14px)
+       - Flag: CRITICAL if mobile layout broken, HIGH if CTAs too small
+    
+    4. IMAGE RENDERING:
+       - Verify all images load (check for missing image icons)
+       - Check image alignment (left, center, right as specified)
+       - Verify alt text is present (use email HTML data from Task 2)
+       - Check for pixelation or compression artifacts
+       - Flag: HIGH if images missing, MEDIUM if alt text missing, LOW if quality issues
+    
+    5. FONT RENDERING:
+       - Check font family consistency throughout email
+       - Verify font weights are correct (bold headings, normal body)
+       - Check for font fallback issues (when custom font fails to load)
+       - Verify text is not cut off or truncated
+       - Flag: MEDIUM if font inconsistencies, LOW if minor rendering quirks
+    
+    6. BRAND GUIDELINE COMPLIANCE:
+       - Verify brand colors match guidelines (from DynamicRulesEngine)
+       - Check logo appears and is correct size
+       - Verify brand fonts are used consistently
+       - Check overall visual hierarchy matches brand standards
+       - Flag: HIGH if brand colors wrong, MEDIUM if logo issues
+    
+    If screenshots are not provided in {screenshot_paths}, generate them from email HTML.
+    Use OCRTool to extract text from screenshots for automated analysis.
+    Cross-reference brand guidelines from Task 1 requirements and DynamicRulesEngine.
+  
+  expected_output: >
+    A visual QA report with specific issues and screenshot evidence as detailed JSON.
+    Include dark_mode_validation, module_padding_validation, responsive_design_validation,
+    image_rendering, font_rendering, brand_guideline_compliance, and issues_summary.
+    Include screenshot_evidence paths for issues so developers can see exactly what's wrong.
+
+  agent: visual_qa_inspector
+  context:
+    - extract_copy_requirements
+    - analyze_email_content
+    - validate_links_and_ctas
+
+final_compliance_check:
+  description: >
+    Perform final compliance and metadata validation before email launch using the email at: {email_content}
+    
+    This is the last gate before the email goes live - catch any legal or accessibility issues now.
+    
+    Perform the following compliance checks:
+    
+    1. CAN-SPAM COMPLIANCE (LEGAL REQUIREMENT):
+       - Verify unsubscribe link is present AND functional
+       - Check physical mailing address is in footer
+       - Verify sender name matches from address
+       - Check email is not deceptive (subject matches content)
+       - Flag: CRITICAL for any CAN-SPAM violation (fines up to $46,517 per email)
+    
+    2. SENDER METADATA VALIDATION (ClickUp #7):
+       - Verify sender name matches requirements from Task 1
+       - Check from email address is correct
+       - Verify reply-to address is set (if different from from address)
+       - Check sender name is consistent with brand guidelines
+       - Flag: CRITICAL if sender name/email wrong (deliverability impact)
+    
+    3. ACCESSIBILITY VALIDATION (WCAG 2.1 AA):
+       - Verify all images have alt text (from Task 2 and Task 4 data)
+       - Check color contrast ratios meet WCAG standards (from Task 4)
+       - Verify semantic HTML structure (headings h1-h6 in order)
+       - Check link text is descriptive (no "click here")
+       - Verify CTA buttons have sufficient size for accessibility
+       - Flag: HIGH for accessibility failures (legal requirement in some industries)
+    
+    4. PLACEHOLDER CONTENT CHECK:
+       - Scan for test phone numbers (555-555-5555, 555-1234, etc.)
+       - Check for test emails (test@test.com, test@example.com)
+       - Look for lorem ipsum or dummy text
+       - Find placeholder images (placeholder.png, temp.jpg)
+       - Check for [INSERT X] or merge fields left unreplaced (example: MERGE_FIELD)
+       - Flag: CRITICAL if any placeholder content found (looks unprofessional)
+    
+    5. CLIENT-SPECIFIC COMPLIANCE:
+       - Load client rules from DynamicRulesEngine using {client_name}
+       - Check dos_and_donts rules (e.g., no "click here", CTAs must be uppercase)
+       - Verify compliance requirements from client guidelines
+       - Check industry-specific requirements (e.g., senior living disclaimers)
+       - Flag: Varies by rule severity (CRITICAL for legal, MEDIUM for style)
+    
+    6. METADATA COMPLETENESS:
+       - Verify subject line is under 60 characters (optimal for mobile display)
+       - Check preview text is 90-140 characters (optimal length)
+       - Verify from name is under 20 characters (prevents truncation)
+       - Check that email has both HTML and plain text versions
+       - Flag: MEDIUM if metadata not optimized (deliverability/UX impact)
+    
+    Use DynamicRulesEngine to load client-specific rules from: rules/clients/{client_name}.json
+    Cross-reference all previous task outputs to compile comprehensive compliance report.
+    This is the FINAL CHECK before launch - be thorough.
+  
+  expected_output: >
+    A comprehensive compliance report that serves as launch readiness checklist.
+    Include can_spam_compliance, sender_metadata, accessibility_compliance, placeholder_content_check,
+    client_specific_compliance, metadata_optimization, launch_readiness, and final_checklist.
+    The launch_readiness section is the key output - tells team exactly if email can launch.
+    If ready_for_launch=false, list ONLY blocking issues that MUST be fixed.
+
+  agent: compliance_and_metadata_checker
+  context:
+    - extract_copy_requirements
+    - analyze_email_content
+    - validate_links_and_ctas
+    - visual_qa_inspection
+    
+generate_comprehensive_report:
+  description: >
+    Synthesize findings from all previous tasks into a comprehensive QA report with
+    specific citations, A/B test analysis, and evidence.
+    
+    For EVERY issue found, provide:
+    1. Exact location in email (module name, section, HTML element)
+    2. Citation to copy document requirement (page, section, exact text)
+    3. Before/After example showing what's wrong and what's correct
+    4. Step-by-step fix instructions
+    
+    **A/B TEST ANALYSIS** (if variants detected in Task 1):
+    - Compare variants side-by-side
+    - Identify which variant has fewer issues
+    - Note differences in CTAs, subject lines, modules
+    - Recommend which variant to launch based on compliance and content accuracy
+    
+    Report structure:
+    
+    **EXECUTIVE SUMMARY**
+    - Launch decision: BLOCK / APPROVE WITH FIXES / APPROVE
+    - Critical issues: X (blocking launch)
+    - High priority: X (should fix)
+    - Medium/Low: X (can fix later)
+    
+    **A/B TEST COMPARISON** (if applicable)
+    - Variant A vs Variant B analysis
+    - Which variant is ready to launch
+    - Key differences and recommendations
+    
+    **BLOCKING ISSUES** (Critical)
+    For each:
+    - Issue: [Description]
+    - Location: [Module/section in email]
+    - Expected: [Quote from copy doc]
+    - Found: [Quote from email]
+    - Impact: [Why this blocks launch]
+    - Fix: [Specific steps]
+    
+    **HIGH PRIORITY ISSUES**
+    [Same structure]
+    
+    **MEDIUM/LOW PRIORITY**
+    [Same structure]
+    
+    **COMPLIANCE SUMMARY**
+    - CAN-SPAM: PASS/FAIL
+    - Accessibility: PASS/FAIL
+    - Client rules: PASS/FAIL
+    
+    **LINK VALIDATION**
+    - Working: X/Y links
+    - Broken: [List with URLs]
+    
+    **LAUNCH CHECKLIST**
+    - [ ] Critical issues resolved
+    - [ ] Unsubscribe link working
+    - [ ] Alt text on images
+    - [ ] Links tested
+    - [ ] A/B variants validated
+    
+    Cross-reference all findings with copy document at {document_content} and 
+    email at {email_content} for accurate citations.
+  
+  expected_output: >
+    A comprehensive markdown report with executive summary, A/B test analysis (if applicable),
+    detailed findings organized by severity, compliance summary, and launch checklist.
+    Format as clean markdown with headers, bullet points, and actionable recommendations.
+  
+  agent: report_generator
+  context:
+    - extract_copy_requirements
+    - analyze_email_content
+    - validate_links_and_ctas
+    - visual_qa_inspection
+    - final_compliance_check  

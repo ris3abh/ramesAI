@@ -1,0 +1,212 @@
+{
+  "client_name": "Yanmar",
+  "description": "Yanmar Tractors email QA rules for Field Notes newsletter campaigns",
+  
+  "segmentation": {
+    "prospects": {
+      "required_subject_keywords": ["explore", "discover", "learn"],
+      "required_preview_keywords": ["attachments", "techniques", "learn about"],
+      "description": "New potential customers who don't own Yanmar yet"
+    },
+    "owners": {
+      "required_subject_keywords": ["projects", "maintenance", "tips", "save", "money"],
+      "required_preview_keywords": ["simple", "projects", "make", "difference"],
+      "description": "Existing Yanmar tractor owners"
+    }
+  },
+  
+  "modules": {
+    "all": [
+      {
+        "name": "Field Notes Header",
+        "keywords": ["FIELD NOTES", "AUGUST 2025"],
+        "required": true
+      },
+      {
+        "name": "Exclusive Offers Module",
+        "keywords": ["Explore Our Latest Exclusive Offers", "exclusive offers", "cash rebates", "EXPLORE OFFERS"],
+        "required": true
+      },
+      {
+        "name": "Connect with Yanmar Module",
+        "keywords": ["Connect With Yanmar", "Customer Experience Team", "770-637-0441", "SEND EMAIL"],
+        "required": true
+      },
+      {
+        "name": "Footer",
+        "keywords": ["Yanmar America Corporation", "101 International Pkwy", "Adairsville, GA"],
+        "required": true
+      }
+    ],
+    "prospects": [
+      {
+        "name": "UGC Module (Prospects)",
+        "keywords": ["Still discovering", "Follow @yanmartractorsamerica", "JOIN THE COMMUNITY"],
+        "required": true
+      },
+      {
+        "name": "Custom Tractor Builder",
+        "keywords": ["Custom Tractor Builder", "BUILD MY TRACTOR", "Design your dream"],
+        "required": true
+      }
+    ],
+    "owners": [
+      {
+        "name": "UGC Module (Owners)",
+        "keywords": ["Loving your Yanmar", "Tag @yanmartractorsamerica", "SEE THE COMMUNITY"],
+        "required": true
+      },
+      {
+        "name": "Genuine Yanmar Parts",
+        "keywords": ["Shop Genuine Yanmar Parts", "SHOP NOW", "Parts Store"],
+        "required": true
+      }
+    ],
+    "august_field_notes_8_16": [
+      {
+        "name": "Fence Building Article",
+        "keywords": ["Compact Tractors Build Strong Fences", "GET THE DETAILS"],
+        "required": true
+      },
+      {
+        "name": "Composting Guide",
+        "keywords": ["Turning Waste Into Wealth", "START COMPOSTING TODAY"],
+        "required": true
+      }
+    ],
+    "august_field_notes_8_30": [
+      {
+        "name": "Attachment Maintenance",
+        "keywords": ["Keep Your Tractor Attachments", "GET TO WORK"],
+        "required": false
+      },
+      {
+        "name": "Gas vs Diesel UTV",
+        "keywords": ["Gas vs. Diesel", "Which UTV Is Right", "LEARN MORE"],
+        "required": false
+      },
+      {
+        "name": "Summer Projects",
+        "keywords": ["Get More Done", "Simple Summer", "GET STARTED"],
+        "required": true
+      }
+    ]
+  },
+  
+  "ctas": {
+    "all": [
+      "EXPLORE OFFERS",
+      "SEND EMAIL",
+      "CALL 770-637-0441"
+    ],
+    "prospects": [
+      "GET THE DETAILS",
+      "START COMPOSTING TODAY",
+      "JOIN THE COMMUNITY",
+      "BUILD MY TRACTOR"
+    ],
+    "owners": [
+      "GET TO WORK",
+      "LEARN MORE",
+      "GET STARTED",
+      "SEE THE COMMUNITY IN ACTION",
+      "SHOP NOW"
+    ]
+  },
+  
+  "utm_requirements": {
+    "required_params": [],
+    "expected_values": {},
+    "note": "Yanmar uses click.e.yanmartractor.com tracking instead of UTM parameters"
+  },
+  
+  "brand": {
+    "phone": "770-637-0441",
+    "social_handles": {
+      "instagram": "yanmartractorsamerica",
+      "facebook": "YanmarTractors",
+      "linkedin": "YanmarAmerica",
+      "youtube": "YanmarAmerica"
+    },
+    "company_info": {
+      "name": "Yanmar America Corporation",
+      "address": "101 International Pkwy",
+      "city_state_zip": "Adairsville, GA 30103 US"
+    },
+    "from_name": "Yanmar Tractors",
+    "from_email": "yanmartractors@e.yanmartractor.com"
+  },
+  
+  "dos_and_donts": {
+    "dos": [
+      {
+        "phrase": "your Yanmar",
+        "context": "Use possessive language to create ownership connection",
+        "category": "tone",
+        "check_presence": false
+      },
+      {
+        "phrase": "We'll show you",
+        "context": "Use action-oriented, helpful language",
+        "category": "tone",
+        "check_presence": false
+      },
+      {
+        "phrase": "Get the most out of",
+        "context": "Focus on value and efficiency",
+        "category": "messaging",
+        "check_presence": false
+      }
+    ],
+    "donts": [
+      {
+        "phrase": "555-555-5555",
+        "reason": "Placeholder phone numbers must be replaced with real contact info",
+        "category": "compliance",
+        "severity": "error"
+      },
+      {
+        "phrase": "555-5555",
+        "reason": "Placeholder phone numbers must be replaced",
+        "category": "compliance",
+        "severity": "error"
+      },
+      {
+        "phrase": "click here",
+        "reason": "Use descriptive CTA text instead of generic 'click here' for accessibility",
+        "category": "accessibility",
+        "severity": "warning"
+      },
+      {
+        "phrase": "lorem ipsum",
+        "reason": "No placeholder/dummy text allowed in production emails",
+        "category": "quality",
+        "severity": "error"
+      },
+      {
+        "phrase": "[placeholder]",
+        "reason": "All placeholders must be replaced with real content",
+        "category": "quality",
+        "severity": "error"
+      },
+      {
+        "phrase": "test@test.com",
+        "reason": "Replace test email addresses with real ones",
+        "category": "quality",
+        "severity": "error"
+      }
+    ]
+  },
+  
+  "compliance": {
+    "required_elements": [
+      "unsubscribe_link",
+      "physical_address",
+      "company_name"
+    ],
+    "cta_style": {
+      "case": "UPPERCASE",
+      "description": "All primary CTAs must be UPPERCASE for consistency"
+    }
+  }
+}
